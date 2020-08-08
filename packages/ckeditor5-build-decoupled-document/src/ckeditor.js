@@ -5,131 +5,282 @@
 
 // The editor creator to use.
 import DecoupledEditorBase from '@ckeditor/ckeditor5-editor-decoupled/src/decouplededitor';
-
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
-import FontSize from '@ckeditor/ckeditor5-font/src/fontsize';
-import FontFamily from '@ckeditor/ckeditor5-font/src/fontfamily';
+import Font from '@ckeditor/ckeditor5-font/src/font';
 import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor';
 import FontBackgroundColor from '@ckeditor/ckeditor5-font/src/fontbackgroundcolor';
-import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
-import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
-import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
-import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
-import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
-import Heading from '@ckeditor/ckeditor5-heading/src/heading';
+import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
+import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
+import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 import Image from '@ckeditor/ckeditor5-image/src/image';
+import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
 import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
-import Indent from '@ckeditor/ckeditor5-indent/src/indent';
-import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
-import Link from '@ckeditor/ckeditor5-link/src/link';
+import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
 import List from '@ckeditor/ckeditor5-list/src/list';
-import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
+import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
+import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
+import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
 
-export default class DecoupledEditor extends DecoupledEditorBase {}
+import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave';
+import Link from '@ckeditor/ckeditor5-link/src/link';
+import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
+import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
+import PageBreak from '@ckeditor/ckeditor5-page-break/src/pagebreak';
+import Indent from '@ckeditor/ckeditor5-indent/src/indent';
+import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
+
+// Custom Plugins
+import CustomFontSizeUI from '../custom-plugins/custom-font-ui/src/CustomFontSizeUI';
+import CustomFontFamilyUI from '../custom-plugins/custom-font-ui/src/CustomFontFamilyUI';
+import Cardio from '../custom-plugins/cardio-ui/src/CardioUI';
+import CustomTable from '../custom-plugins/custom-table/src/CustomTable';
+import Placeholder from '../custom-plugins/placeholder/src/Placeholder';
+
+import '../css/custom.css';
+import { nextPlaceholder } from '../custom-plugins/placeholder/src/PlaceholderUtils';
+
+export default class DecoupledEditor extends DecoupledEditorBase {
+}
 
 // Plugins to include in the build.
 DecoupledEditor.builtinPlugins = [
 	Essentials,
-	Alignment,
-	FontSize,
-	FontFamily,
+	Font,
 	FontColor,
 	FontBackgroundColor,
-	UploadAdapter,
-	Autoformat,
 	Bold,
 	Italic,
-	Strikethrough,
 	Underline,
-	BlockQuote,
-	CKFinder,
-	EasyImage,
-	Heading,
+	Subscript,
+	Superscript,
+	Strikethrough,
+	Alignment,
 	Image,
 	ImageCaption,
 	ImageStyle,
 	ImageToolbar,
 	ImageUpload,
+	ImageResize,
 	Indent,
 	IndentBlock,
-	Link,
+	HorizontalLine,
+	PageBreak,
 	List,
-	MediaEmbed,
+	TodoList,
 	Paragraph,
 	PasteFromOffice,
 	Table,
 	TableToolbar,
-	TextTransformation
+	TableProperties,
+	TableCellProperties,
+	SimpleUploadAdapter,
+	PageBreak,
+	Autosave,
+	Link,
+	RemoveFormat,
+	CustomFontSizeUI,
+	CustomFontFamilyUI,
+	Cardio,
+	CustomTable,
+	Placeholder
 ];
 
 // Editor configuration.
 DecoupledEditor.defaultConfig = {
 	toolbar: {
 		items: [
-			'heading',
+			'undo',
+			'redo',
 			'|',
-			'fontfamily',
-			'fontsize',
+			'fontFamilyDropdown',
+			'|',
+			'fontSizeDropdown',
+			'|',
 			'fontColor',
 			'fontBackgroundColor',
+			'removeFormat',
 			'|',
-			'bold',
-			'italic',
-			'underline',
-			'strikethrough',
+			'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify',
 			'|',
-			'alignment',
+			'bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript',
 			'|',
-			'numberedList',
 			'bulletedList',
+			'numberedList',
+			'todoList',
 			'|',
-			'indent',
-			'outdent',
-			'|',
-			'link',
-			'blockquote',
 			'imageUpload',
 			'insertTable',
-			'mediaEmbed',
+			'horizontalLine',
+			'outdent',
+			'indent',
+			'pageBreak',
+			'link',
 			'|',
-			'undo',
-			'redo'
+			'cardio',
+			'placeholder'
 		]
 	},
 	image: {
-		styles: [
-			'full',
-			'alignLeft',
-			'alignRight'
-		],
+		upload: {
+			types: [ 'png', 'jpg', 'jpeg' ]
+		},
 		toolbar: [
 			'imageStyle:alignLeft',
-			'imageStyle:full',
+			'imageStyle:alignCenter',
 			'imageStyle:alignRight',
-			'|',
-			'imageTextAlternative'
+			'imageStyle:full'
+		],
+		styles: [
+			'alignLeft',
+			'alignCenter',
+			'alignRight',
+			'full'
 		]
 	},
 	table: {
 		contentToolbar: [
 			'tableColumn',
 			'tableRow',
-			'mergeTableCells'
+			'mergeTableCells',
+			'tableProperties',
+			'tableCellProperties'
 		]
 	},
+	fontSize: {
+		options: [
+			8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 22, 24, 26, 28, 36, 48
+		].map( val => ( {
+			model: val,
+			title: val,
+			view: {
+				name: 'span',
+				styles: {
+					'font-size': `${ val }pt`
+				}
+			}
+		} ) )
+	},
+	fontFamily: {
+		options: [
+			'Arial',
+			'Courier New',
+			'Georgia',
+			'Lucida Sans Unicode',
+			'Tahoma',
+			'Times New Roman',
+			'Trebuchet MS',
+			'Verdana'
+		]
+	},
+	autosave: {
+		save( editor ) {
+			if ( editor.config.get( 'autosaveEnabled' ) ) {
+				return saveData( editor.getData() );
+			} else {
+				return false;
+			}
+		}
+	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
-	language: 'en'
+	language: 'pt-br'
 };
+
+// Criação da função "insertHtml" em todas as instâncias criadas do editor.
+DecoupledEditor.prototype.insertHtml = function( html ) {
+	const editor = this;
+	const viewFragment = this.data.processor.toView( html );
+	const modelFragment = this.data.toModel( viewFragment );
+	editor.model.change( writer => {
+		const insertRange = editor.model.insertContent( modelFragment );
+		writer.setSelection( insertRange.end, 'after' );
+		editor.editing.view.focus();
+
+		setTimeout( function() {
+			// Abre opções de variaveis caso exista alguma no texto inserido
+			if ( !nextPlaceholder( editor, true ) ) {
+				// Caso atalho não possua variavel, rola para final do trecho inserido
+				const ev = new KeyboardEvent( 'keydown', {
+					key: 'Enter',
+					keyCode: 13,
+					type: 'keydown',
+					which: 13
+				} );
+				editor.editing.view.getDomRoot().dispatchEvent( ev );
+			}
+		}, 100 );
+	} );
+};
+
+let sidebarReloaded = false;
+
+// Autosave
+function saveData( data ) {
+	if ( !workflowEditor.isReadOnly ) {
+		displayStatus();
+		$( '#customfilledform-filled_form_content' ).val( workflowEditor.getData() );
+		const form = $( '#step-form' );
+		const circleLoader = $( '.circle-loader' );
+		const checkMark = $( '.checkmark' );
+		const statusIndicator = $( '.checkmark-wrapper' );
+		const autosaveAlert = $( '.workflow-autosave' );
+		const autosaveText = autosaveAlert.children( 'span' );
+
+		return new Promise( resolve => {
+			displayStatus();
+			$.ajax( {
+				url: form.attr( 'action' ),
+				data: form.serialize(),
+				type: 'post',
+				success( data ) {
+					circleLoader.addClass( 'load-complete' );
+					checkMark.show();
+					checkMark.fadeIn( 500 );
+					autosaveAlert.removeClass( 'alert-warning' ).addClass( 'alert-success' );
+					autosaveText.text( 'Todas as alterações foram salvas' );
+
+					const treatmentHealthProfessional = $( '#treatment-health-professionals' );
+					if ( !sidebarReloaded ) {
+						treatmentHealthProfessional.load( treatmentHealthProfessional.data( 'url' ) );
+					}
+					sidebarReloaded = true;
+				}
+			} );
+			resolve();
+		} );
+	}
+}
+
+// Atualização do status de salvamento
+function displayStatus() {
+	const pendingActions = workflowEditor.plugins.get( 'PendingActions' );
+	const statusIndicator = $( '.checkmark-wrapper' );
+	const circleLoader = $( '.circle-loader' );
+	const checkMark = $( '.checkmark' );
+	const autosaveAlert = $( '.workflow-autosave' );
+	const autosaveText = autosaveAlert.children( 'span' );
+
+	pendingActions.off( 'change:hasAny' );
+	pendingActions.on( 'change:hasAny', ( evt, propertyName, newValue ) => {
+		autosaveAlert.css( 'opacity', 1 );
+		if ( newValue ) {
+			if ( statusIndicator.is( ':animated' ) ) {
+				statusIndicator.stop().show();
+			}
+			circleLoader.removeClass( 'load-complete' );
+			checkMark.fadeOut( 500 );
+			autosaveAlert.removeClass( 'alert-success' ).addClass( 'alert-warning' );
+			autosaveText.text( 'Salvando...' );
+		}
+	} );
+}
