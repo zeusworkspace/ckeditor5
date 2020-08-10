@@ -73,7 +73,8 @@
     "@ckeditor/ckeditor5-utils": "^21.0.0",
     "@ckeditor/ckeditor5-watchdog": "^21.0.0",
     "@ckeditor/ckeditor5-widget": "^21.0.0",
-    "@ckeditor/ckeditor5-word-count": "^21.0.0"
+    "@ckeditor/ckeditor5-word-count": "^21.0.0",
+    "ckeditor5-simple-upload": "^1.0.6"
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-comments": "^21.0.0",
