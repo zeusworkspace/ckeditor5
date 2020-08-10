@@ -15,3 +15,8 @@ node_modules/@ckeditor/ckeditor5-utils/src/*
 !node_modules/@ckeditor/ckeditor5-utils/src/dom/
 node_modules/@ckeditor/ckeditor5-utils/src/dom/*
 !node_modules/@ckeditor/ckeditor5-utils/src/dom/scroll.js
+/packages/ckeditor5-build-balloon/node_modules/
+/packages/ckeditor5-build-balloon-block/node_modules/
+/packages/ckeditor5-build-inline/node_modules/
+/packages/ckeditor5-build-classic/node_modules/
+/packages/ckeditor5-build-decoupled-document/node_modules/
