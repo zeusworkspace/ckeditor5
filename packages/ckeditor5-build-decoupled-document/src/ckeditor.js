@@ -177,8 +177,8 @@ DecoupledEditor.defaultConfig = {
             'Courier New',
             'Georgia',
             'Lucida Sans Unicode',
-            'Tahoma',
-            'Times New Roman',
+            // 'Tahoma',
+            // 'Times New Roman',
             'Trebuchet MS',
             'Verdana'
         ],
