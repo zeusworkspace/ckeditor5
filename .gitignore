@@ -1,6 +1,4 @@
 /.idea/
-package-lock.json
-yarn.lock
 
 node_modules/*
 !node_modules/@ckeditor/
@@ -20,3 +18,9 @@ node_modules/@ckeditor/ckeditor5-utils/src/dom/*
 /packages/ckeditor5-build-inline/node_modules/
 /packages/ckeditor5-build-classic/node_modules/
 /packages/ckeditor5-build-decoupled-document/node_modules/
+
+# Ignore `yarn.lock` - this file might contain info from external repositories.
+yarn.lock
+
+# Ignore `mrgit.json` this file contains info about external repositories.
+mrgit.json
