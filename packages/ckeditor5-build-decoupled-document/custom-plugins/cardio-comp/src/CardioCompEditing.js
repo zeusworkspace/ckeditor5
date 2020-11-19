@@ -112,7 +112,8 @@ export default class CardioCompEditing extends Plugin {
         conversion.for('downcast').elementToElement({
             converterPriority: 'highest',
             model: 'cardioComp',
-            view: (modelElement, viewWriter) => {
+            view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
                 const table = viewWriter.createContainerElement('table', {
                     class: 'cardio-comp-table',
                     style: 'width:100%; font-size:10pt;',
@@ -135,7 +136,8 @@ export default class CardioCompEditing extends Plugin {
         conversion.for('downcast').elementToElement({
             converterPriority: 'highest',
             model: 'cardioCompTBody',
-            view: (modelElement, viewWriter) => {
+            view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
                 return viewWriter.createContainerElement('tbody', {
                     class: 'cardio-comp-tbody',
                 });
@@ -147,7 +149,8 @@ export default class CardioCompEditing extends Plugin {
 		 ***/
 		conversion.for('upcast').elementToElement({
 			converterPriority: 'highest',
-			model: (viewElement, modelWriter) => {
+			model: (viewElement, conversionApi) => {
+                const modelWriter = conversionApi.writer;
 				return modelWriter.createElement('cardioCompRow', {
 					id: viewElement.getAttribute('id'),
 				});
@@ -160,7 +163,8 @@ export default class CardioCompEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioCompRow',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('tr', {
 					class: 'cardio-comp-row',
 					id: modelElement.getAttribute('id'),
@@ -182,7 +186,8 @@ export default class CardioCompEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioCompCell',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('td', {
 					class: 'cardio-comp-cell',
 					style: 'text-align:center',
@@ -204,7 +209,8 @@ export default class CardioCompEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioCompHidden',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('div', {
 					class: 'cardio-comp-hidden',
 				});
@@ -216,7 +222,8 @@ export default class CardioCompEditing extends Plugin {
 		 ***/
 		conversion.for('upcast').elementToElement({
 			converterPriority: 'highest',
-			model: (viewElement, modelWriter) => {
+			model: (viewElement, conversionApi) => {
+                const modelWriter = conversionApi.writer;
 				return modelWriter.createElement('cardioCompBtnRemove', {
 					'data-trid': viewElement.getAttribute('data-trid'),
 				});
@@ -229,7 +236,8 @@ export default class CardioCompEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioCompBtnRemove',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('button', {
 					'data-trid': modelElement.getAttribute('data-trid'),
 					class: 'btn btn-xs btn-danger btn-remove',
@@ -243,7 +251,8 @@ export default class CardioCompEditing extends Plugin {
          ***/
 		conversion.for('upcast').elementToElement({
 			converterPriority: 'highest',
-			model: (viewElement, modelWriter) => {
+			model: (viewElement, conversionApi) => {
+                const modelWriter = conversionApi.writer;
 				return modelWriter.createElement('cardioCompSectionCell', {
 					colspan: viewElement.getAttribute('colspan'),
 				});
@@ -256,7 +265,8 @@ export default class CardioCompEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioCompSectionCell',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('td', {
 					class: 'cardio-comp-section-cell',
 					style: 'font-weight:bold; padding-top:8px; ',
@@ -279,7 +289,8 @@ export default class CardioCompEditing extends Plugin {
         conversion.for('downcast').elementToElement({
             converterPriority: 'highest',
             model: 'cardioCompLabelCell',
-            view: (modelElement, viewWriter) => {
+            view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
                 return viewWriter.createContainerElement('td', {
                     class: 'cardio-comp-label-cell',
                     style: 'white-space:nowrap;',
@@ -292,7 +303,8 @@ export default class CardioCompEditing extends Plugin {
          ***/
         conversion.for('upcast').elementToElement({
             converterPriority: 'highest',
-            model: (viewElement, modelWriter) => {
+            model: (viewElement, conversionApi) => {
+                const modelWriter = conversionApi.writer;
                 return modelWriter.createElement('cardioCompInputCell', {
                     id: viewElement.getAttribute('id'),
 					tabindex: viewElement.getAttribute('tabindex')
@@ -306,7 +318,8 @@ export default class CardioCompEditing extends Plugin {
         conversion.for('downcast').elementToElement({
             converterPriority: 'highest',
             model: 'cardioCompInputCell',
-            view: (modelElement, viewWriter) => {
+            view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
                 const td = viewWriter.createEditableElement('td', {
                     id: modelElement.getAttribute('id'),
                     class: 'cardio-comp-input-cell',
@@ -331,7 +344,8 @@ export default class CardioCompEditing extends Plugin {
         conversion.for('downcast').elementToElement({
             converterPriority: 'highest',
             model: 'cardioCompUnitCell',
-            view: (modelElement, viewWriter) => {
+            view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
                 return viewWriter.createContainerElement('td', {
                     class: 'cardio-comp-unit-cell',
                     style: 'padding-left:2px; width:80px; white-space:nowrap;',
@@ -344,7 +358,8 @@ export default class CardioCompEditing extends Plugin {
          ***/
         conversion.for('upcast').elementToElement({
             converterPriority: 'highest',
-            model: (viewElement, modelWriter) => {
+            model: (viewElement, conversionApi) => {
+                const modelWriter = conversionApi.writer;
                 return modelWriter.createElement('cardioCompAutoValueCell', {
                     id: viewElement.getAttribute('id'),
                 });
@@ -357,7 +372,8 @@ export default class CardioCompEditing extends Plugin {
         conversion.for('downcast').elementToElement({
             converterPriority: 'highest',
             model: 'cardioCompAutoValueCell',
-            view: (modelElement, viewWriter) => {
+            view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
                 return viewWriter.createContainerElement('td', {
                     id: modelElement.getAttribute('id'),
                     class: 'cardio-comp-auto-value-cell',
@@ -371,7 +387,8 @@ export default class CardioCompEditing extends Plugin {
          ***/
         conversion.for('upcast').elementToElement({
             converterPriority: 'highest',
-            model: (viewElement, modelWriter) => {
+            model: (viewElement, conversionApi) => {
+                const modelWriter = conversionApi.writer;
                 return modelWriter.createElement('cardioCompRefInputCell', {
                     id: viewElement.getAttribute('id'),
                 });
@@ -384,7 +401,8 @@ export default class CardioCompEditing extends Plugin {
         conversion.for('downcast').elementToElement({
             converterPriority: 'highest',
             model: 'cardioCompRefInputCell',
-            view: (modelElement, viewWriter) => {
+            view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
                 const td = viewWriter.createEditableElement('td', {
                     id: modelElement.getAttribute('id'),
                     class: 'cardio-comp-ref-input-cell',

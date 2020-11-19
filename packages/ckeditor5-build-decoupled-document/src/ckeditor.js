@@ -39,6 +39,7 @@ import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalli
 import PageBreak from '@ckeditor/ckeditor5-page-break/src/pagebreak';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
+import Blockquote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 
 // Custom Plugins
 import CustomFontSizeUI from '../custom-plugins/custom-font-ui/src/CustomFontSizeUI';
@@ -74,6 +75,7 @@ DecoupledEditor.builtinPlugins = [
     ImageResize,
     Indent,
     IndentBlock,
+    Blockquote,
     HorizontalLine,
     PageBreak,
     List,
@@ -118,6 +120,7 @@ DecoupledEditor.defaultConfig = {
             'bulletedList',
             'numberedList',
             'todoList',
+            'Blockquote',
             '|',
             'imageUpload',
             'insertTable',

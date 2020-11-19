@@ -119,7 +119,8 @@ export default class CardioStressEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioStress',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				const table = viewWriter.createContainerElement('div', {
 					class: 'cardio-stress',
 					style: 'width:100%; font-size:10pt;',
@@ -143,7 +144,8 @@ export default class CardioStressEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioStressImg',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('img', {
 					src: stressHeader(),
 					class: 'cardio-stress-img',
@@ -166,7 +168,8 @@ export default class CardioStressEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioStressParagraph',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('p', {
 					class: 'cardio-stress-paragraph',
 					style: 'font-size:10pt; margin: 5px 0 !important;',
@@ -179,7 +182,8 @@ export default class CardioStressEditing extends Plugin {
 		 ***/
 		conversion.for('upcast').elementToElement({
 			converterPriority: 'highest',
-			model: (viewElement, modelWriter) => {
+			model: (viewElement, conversionApi) => {
+                const modelWriter = conversionApi.writer;
 				return modelWriter.createElement('cardioStressCaption', {
 					id: viewElement.getAttribute('id'),
 				});
@@ -192,7 +196,8 @@ export default class CardioStressEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioStressCaption',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('span', {
 					id: modelElement.getAttribute('id'),
 					class: 'cardio-stress-caption',
@@ -215,7 +220,8 @@ export default class CardioStressEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioStressInputContent',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('div', {
 					class: 'cardio-stress-input-content',
 					style: 'width:100%; padding-bottom:10px;',
@@ -237,7 +243,8 @@ export default class CardioStressEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioStressInputColumn',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('div', {
 					class: 'cardio-stress-input-column',
 					style: 'width:25%; float:left;',
@@ -259,7 +266,8 @@ export default class CardioStressEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioStressInputTable',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('table', {
 					class: 'cardio-stress-input-table',
 					style: 'margin:0 auto; border-collapse:collapse;',
@@ -281,7 +289,8 @@ export default class CardioStressEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioStressInputTbody',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('tbody', {
 					class: 'cardio-stress-input-tbody',
 				});
@@ -302,7 +311,8 @@ export default class CardioStressEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioStressInputRow',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('tr', {
 					class: 'cardio-stress-input-row',
 				});
@@ -323,7 +333,8 @@ export default class CardioStressEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioStressCellGreen',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('td', {
 					class: 'cardio-stress-cell-green cardio-stress-cell-color',
 					style: 'text-align:center; background-color:#4e9900; border:1px solid lightgray; width:25px;',
@@ -345,7 +356,8 @@ export default class CardioStressEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioStressCellYellow',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('td', {
 					class: 'cardio-stress-cell-yellow cardio-stress-cell-color',
 					style: 'text-align:center; background-color:#f7ba36; border:1px solid lightgray; width:25px;',
@@ -367,7 +379,8 @@ export default class CardioStressEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioStressCellRed',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('td', {
 					class: 'cardio-stress-cell-red cardio-stress-cell-color',
 					style: 'text-align:center; background-color:#db323e; border:1px solid lightgray; width:25px;',
@@ -380,7 +393,8 @@ export default class CardioStressEditing extends Plugin {
 		 ***/
 		conversion.for('upcast').elementToElement({
 			converterPriority: 'highest',
-			model: (viewElement, modelWriter) => {
+			model: (viewElement, conversionApi) => {
+                const modelWriter = conversionApi.writer;
 				return modelWriter.createElement('cardioStressCell', {
 					classes: Array.from(viewElement.getClassNames()),
 					tabindex: viewElement.getAttribute('tabindex'),
@@ -394,7 +408,8 @@ export default class CardioStressEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioStressCell',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				const td = viewWriter.createEditableElement('td', {
 					tabindex: modelElement.getAttribute('tabindex'),
 					class: modelElement.getAttribute('classes').join(' '),
@@ -418,7 +433,8 @@ export default class CardioStressEditing extends Plugin {
 		conversion.for('downcast').elementToElement({
 			converterPriority: 'highest',
 			model: 'cardioStressLegend',
-			view: (modelElement, viewWriter) => {
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('p', {
 					class: 'cardio-stress-legend',
 					style: 'font-size: 7pt',

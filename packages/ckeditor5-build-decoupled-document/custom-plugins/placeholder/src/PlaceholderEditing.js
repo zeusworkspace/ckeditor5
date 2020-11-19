@@ -152,8 +152,8 @@ export default class PlaceholderEditing extends Plugin {
                 name: 'span',
                 classes: ['placeholder'],
             },
-            model: (viewElement, modelWriter) => {
-
+            model: (viewElement, conversionApi) => {
+                const modelWriter = conversionApi.writer;
                 const data = {
                     name: viewElement.getAttribute('data-name'),
                     attr: viewElement.getAttribute('data-attr'),
@@ -187,7 +187,8 @@ export default class PlaceholderEditing extends Plugin {
         // Define downcast conversion:
         conversion.for('downcast').elementToElement({
             model: 'placeholder',
-            view: (modelElement, viewWriter) => {
+            view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
                 return createModelWidget(modelElement, viewWriter);
             }
         });
