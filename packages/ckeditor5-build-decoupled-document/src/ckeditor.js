@@ -24,6 +24,8 @@ import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
 import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
 import List from '@ckeditor/ckeditor5-list/src/list';
+import ListStyle from '@ckeditor/ckeditor5-list/src/liststyle';
+// import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
@@ -80,6 +82,7 @@ DecoupledEditor.builtinPlugins = [
     PageBreak,
     List,
     TodoList,
+	ListStyle,
     Paragraph,
     PasteFromOffice,
     Table,
@@ -90,6 +93,7 @@ DecoupledEditor.builtinPlugins = [
     PageBreak,
     Autosave,
     Link,
+	// MediaEmbed,
     RemoveFormat,
     CustomFontSizeUI,
     CustomFontFamilyUI,
@@ -129,6 +133,7 @@ DecoupledEditor.defaultConfig = {
             'indent',
             'pageBreak',
             'link',
+			// 'mediaEmbed',
             '|',
             'cardio',
             'placeholder'
