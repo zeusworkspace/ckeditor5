@@ -188,7 +188,7 @@ function createCardioTable(editor) {
 		'</tr>' +
 
 		'<tr class="cardio-row" id="tr-sao">' +
-			'<td class="cardio-label-cell">Seios Aórticos:</td>' +
+			'<td class="cardio-label-cell">Raiz da Aorta (Seios Aórticos):</td>' +
 			`<td class="cardio-input-cell" id="sao" tabindex="${++tabIndex}"></td>` +
 			'<td class="cardio-unit-cell">mm</td>' +
 			`<td class="cardio-ref-input-cell" id="refsao">${(references['refsao'] || '-')}</td>` +
