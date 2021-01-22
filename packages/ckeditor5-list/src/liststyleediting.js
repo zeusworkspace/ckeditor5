@@ -212,7 +212,7 @@ function upcastListItemStyle() {
 	return dispatcher => {
 		dispatcher.on( 'element:li', ( evt, data, conversionApi ) => {
 			const listParent = data.viewItem.parent;
-			const listStyle = listParent.getStyle( 'list-style-type' ) || DEFAULT_LIST_TYPE;
+			const listStyle = (listParent && listParent.getStyle( 'list-style-type' )) || DEFAULT_LIST_TYPE;
 			const listItem = data.modelRange.start.nodeAfter || data.modelRange.end.nodeBefore;
 
 			conversionApi.writer.setAttribute( 'listStyle', listStyle, listItem );
