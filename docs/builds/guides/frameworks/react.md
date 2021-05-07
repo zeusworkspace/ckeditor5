@@ -4,9 +4,15 @@ category: builds-integration-frameworks
 order: 30
 ---
 
+{@snippet builds/frameworks/framework-integration}
+
 # Rich text editor component for React
 
-[![npm version](https://badge.fury.io/js/%40ckeditor%2Fckeditor5-react.svg)](https://www.npmjs.com/package/@ckeditor/ckeditor5-react)
+<p>
+	<a href="https://www.npmjs.com/package/@ckeditor/ckeditor5-react" target="_blank" rel="noopener">
+		<img src="https://badge.fury.io/js/%40ckeditor%2Fckeditor5-react.svg" alt="npm version" loading="lazy">
+	</a>
+</p>
 
 CKEditor 5 consists of {@link builds/guides/overview ready-to-use editor builds} and {@link framework/guides/overview CKEditor 5 Framework} upon which the builds are based.
 
@@ -157,7 +163,7 @@ The `CKEditorContext` component supports the following properties:
 
 ## Customizing the builds
 
-{@link builds/guides/overview CKEditor 5 builds} come ready to use, with a set of built-in plugins and a predefined configuration. While you can change the configuration easily by using the `config` property of the `<CKEditor>` component which allows you to change the {@link builds/guides/integration/configuration#toolbar-setup toolbar} or {@link builds/guides/integration/configuration#removing-features remove some plugins}, in order to add plugins you need to rebuild the editor.
+{@link builds/guides/overview CKEditor 5 builds} come ready to use, with a set of built-in plugins and a predefined configuration. While you can change the configuration easily by using the `config` property of the `<CKEditor>` component which allows you to change the {@link features/toolbar toolbar} or {@link builds/guides/integration/configuration#removing-features remove some plugins}, in order to add plugins you need to rebuild the editor.
 
 There are three main ways to do that.
 
