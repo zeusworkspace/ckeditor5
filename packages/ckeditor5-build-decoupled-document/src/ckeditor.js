@@ -5,38 +5,31 @@
 
 // The editor creator to use.
 import DecoupledEditorBase from '@ckeditor/ckeditor5-editor-decoupled/src/decouplededitor';
+
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import Font from '@ckeditor/ckeditor5-font/src/font';
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor';
 import FontBackgroundColor from '@ckeditor/ckeditor5-font/src/fontbackgroundcolor';
-import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
-import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
-import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
+import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 import Image from '@ckeditor/ckeditor5-image/src/image';
-import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
 import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
-import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
 import List from '@ckeditor/ckeditor5-list/src/list';
 import ListStyle from '@ckeditor/ckeditor5-list/src/liststyle';
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
-import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
-import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
-import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
 
-
+import CustomFontSizeUI from '../custom-plugins/custom-font-ui/src/CustomFontSizeUI';
+import CustomFontFamilyUI from '../custom-plugins/custom-font-ui/src/CustomFontFamilyUI';
 import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
@@ -47,14 +40,20 @@ import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 import Blockquote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 
 // Custom Plugins
-import CustomFontSizeUI from '../custom-plugins/custom-font-ui/src/CustomFontSizeUI';
-import CustomFontFamilyUI from '../custom-plugins/custom-font-ui/src/CustomFontFamilyUI';
 import Cardio from '../custom-plugins/cardio-ui/src/CardioUI';
 import CustomTable from '../custom-plugins/custom-table/src/CustomTable';
 import Placeholder from '../custom-plugins/placeholder/src/Placeholder';
 
 import '../css/custom.css';
 import {nextPlaceholder} from '../custom-plugins/placeholder/src/PlaceholderUtils';
+import FontSize from "@ckeditor/ckeditor5-font/src/fontsize";
+import Subscript from "@ckeditor/ckeditor5-basic-styles/src/subscript";
+import Superscript from "@ckeditor/ckeditor5-basic-styles/src/superscript";
+import ImageResize from "@ckeditor/ckeditor5-image/src/imageresize";
+import TodoList from "@ckeditor/ckeditor5-list/src/todolist";
+import TableProperties from "@ckeditor/ckeditor5-table/src/tableproperties";
+import TableCellProperties from "@ckeditor/ckeditor5-table/src/tablecellproperties";
+import {SimpleUploadAdapter} from "@ckeditor/ckeditor5-upload";
 
 export default class DecoupledEditor extends DecoupledEditorBase {
 }
@@ -62,10 +61,10 @@ export default class DecoupledEditor extends DecoupledEditorBase {
 // Plugins to include in the build.
 DecoupledEditor.builtinPlugins = [
     Essentials,
-    Font,
-	FontColor,
-	FontBackgroundColor,
-    Autoformat,
+    FontSize,
+    FontColor,
+    FontBackgroundColor,
+    TextTransformation,
     Bold,
     Italic,
     Underline,
@@ -86,7 +85,7 @@ DecoupledEditor.builtinPlugins = [
     PageBreak,
     List,
     TodoList,
-	ListStyle,
+    ListStyle,
     Paragraph,
     PasteFromOffice,
     Table,
@@ -97,7 +96,7 @@ DecoupledEditor.builtinPlugins = [
     PageBreak,
     Autosave,
     Link,
-	MediaEmbed,
+    MediaEmbed,
     RemoveFormat,
     CustomFontSizeUI,
     CustomFontFamilyUI,
@@ -137,7 +136,7 @@ DecoupledEditor.defaultConfig = {
             'indent',
             'pageBreak',
             'link',
-			'mediaEmbed',
+            'mediaEmbed',
             '|',
             'cardio',
             'placeholder'
@@ -193,7 +192,7 @@ DecoupledEditor.defaultConfig = {
             // 'Times New Roman',
             'Trebuchet MS',
             'Verdana'
-        ],
+        ]
     },
     autosave: {
         save(editor) {
@@ -219,19 +218,17 @@ DecoupledEditor.prototype.insertHtml = function (html) {
         editor.editing.view.focus();
 
         setTimeout(function () {
-
-			// Abre opções de variaveis caso exista alguma no texto inserido
-            if(!nextPlaceholder(editor, true)){
-
-				// Caso atalho não possua variavel, rola para final do trecho inserido
-				const ev = new KeyboardEvent('keydown', {
-					key: "Enter",
-					keyCode: 13,
-					type: "keydown",
-					which: 13
-				});
-				editor.editing.view.getDomRoot().dispatchEvent(ev);
-			}
+            // Abre opções de variaveis caso exista alguma no texto inserido
+            if (!nextPlaceholder(editor, true)) {
+                // Caso atalho não possua variavel, rola para final do trecho inserido
+                const ev = new KeyboardEvent('keydown', {
+                    key: 'Enter',
+                    keyCode: 13,
+                    type: 'keydown',
+                    which: 13
+                });
+                editor.editing.view.getDomRoot().dispatchEvent(ev);
+            }
         }, 100);
     });
 };
@@ -243,12 +240,12 @@ function saveData(data) {
     if (!workflowEditor.isReadOnly) {
         displayStatus();
         $('#customfilledform-filled_form_content').val(workflowEditor.getData());
-        const form = $('#step-form'),
-            circleLoader = $('.circle-loader'),
-            checkMark = $('.checkmark'),
-            statusIndicator = $('.checkmark-wrapper'),
-            autosaveAlert = $('.workflow-autosave'),
-            autosaveText = autosaveAlert.children('span');
+        const form = $('#step-form');
+        const circleLoader = $('.circle-loader');
+        const checkMark = $('.checkmark');
+        const statusIndicator = $('.checkmark-wrapper');
+        const autosaveAlert = $('.workflow-autosave');
+        const autosaveText = autosaveAlert.children('span');
 
         return new Promise(resolve => {
             displayStatus();
@@ -256,7 +253,7 @@ function saveData(data) {
                 url: form.attr('action'),
                 data: form.serialize(),
                 type: 'post',
-                success: function (data) {
+                success(data) {
                     circleLoader.addClass('load-complete');
                     checkMark.show();
                     checkMark.fadeIn(500);
@@ -277,12 +274,12 @@ function saveData(data) {
 
 // Atualização do status de salvamento
 function displayStatus() {
-    const pendingActions = workflowEditor.plugins.get('PendingActions'),
-        statusIndicator = $('.checkmark-wrapper'),
-        circleLoader = $('.circle-loader'),
-        checkMark = $('.checkmark'),
-        autosaveAlert = $('.workflow-autosave'),
-        autosaveText = autosaveAlert.children('span');
+    const pendingActions = workflowEditor.plugins.get('PendingActions');
+    const statusIndicator = $('.checkmark-wrapper');
+    const circleLoader = $('.circle-loader');
+    const checkMark = $('.checkmark');
+    const autosaveAlert = $('.workflow-autosave');
+    const autosaveText = autosaveAlert.children('span');
 
     pendingActions.off('change:hasAny');
     pendingActions.on('change:hasAny', (evt, propertyName, newValue) => {
