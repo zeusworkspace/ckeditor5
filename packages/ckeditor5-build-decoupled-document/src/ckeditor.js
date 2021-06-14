@@ -8,6 +8,7 @@ import DecoupledEditorBase from '@ckeditor/ckeditor5-editor-decoupled/src/decoup
 
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
+import Font from '@ckeditor/ckeditor5-font/src/font';
 import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor';
 import FontBackgroundColor from '@ckeditor/ckeditor5-font/src/fontbackgroundcolor';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
@@ -28,8 +29,6 @@ import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 
-import CustomFontSizeUI from '../custom-plugins/custom-font-ui/src/CustomFontSizeUI';
-import CustomFontFamilyUI from '../custom-plugins/custom-font-ui/src/CustomFontFamilyUI';
 import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
@@ -40,6 +39,8 @@ import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 import Blockquote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 
 // Custom Plugins
+import CustomFontSizeUI from '../custom-plugins/custom-font-ui/src/CustomFontSizeUI';
+import CustomFontFamilyUI from '../custom-plugins/custom-font-ui/src/CustomFontFamilyUI';
 import Cardio from '../custom-plugins/cardio-ui/src/CardioUI';
 import CustomTable from '../custom-plugins/custom-table/src/CustomTable';
 import Placeholder from '../custom-plugins/placeholder/src/Placeholder';
@@ -61,6 +62,7 @@ export default class DecoupledEditor extends DecoupledEditorBase {
 // Plugins to include in the build.
 DecoupledEditor.builtinPlugins = [
     Essentials,
+    Font,
     FontSize,
     FontColor,
     FontBackgroundColor,
@@ -98,11 +100,11 @@ DecoupledEditor.builtinPlugins = [
     Link,
     MediaEmbed,
     RemoveFormat,
-    CustomFontSizeUI,
-    CustomFontFamilyUI,
     Cardio,
     CustomTable,
-    Placeholder
+    Placeholder,
+    CustomFontSizeUI,
+    CustomFontFamilyUI,
 ];
 
 // Editor configuration.
@@ -243,7 +245,6 @@ function saveData(data) {
         const form = $('#step-form');
         const circleLoader = $('.circle-loader');
         const checkMark = $('.checkmark');
-        const statusIndicator = $('.checkmark-wrapper');
         const autosaveAlert = $('.workflow-autosave');
         const autosaveText = autosaveAlert.children('span');
 
