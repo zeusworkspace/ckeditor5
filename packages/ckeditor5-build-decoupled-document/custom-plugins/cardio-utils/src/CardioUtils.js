@@ -347,7 +347,7 @@ function getFormattedValues() {
         const tdElem = getCkElementById(editor, arguments[i]);
         const textElem = tdElem ? tdElem.getChild(0) : undefined;
         let value = textElem ? textElem.data : '';
-        formattedValues[arguments[i]] = value.match(/[a-z]/i) ? '' : parseFloat(value.replace(',', '.'));
+        formattedValues[arguments[i]] = (value && value.match(/[a-z]/i)) ? '' : parseFloat(value.replace(',', '.'));
     }
     return formattedValues;
 }
