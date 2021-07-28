@@ -346,7 +346,7 @@ function getFormattedValues() {
     for (let i = 1; i < arguments.length; i++) {
         const tdElem = getCkElementById(editor, arguments[i]);
         const textElem = tdElem ? tdElem.getChild(0) : undefined;
-        let value = textElem ? textElem.data : '';
+        let value = textElem && textElem.data ? textElem.data : '';
         formattedValues[arguments[i]] = (value && value.match(/[a-z]/i)) ? '' : parseFloat(value.replace(',', '.'));
     }
     return formattedValues;
