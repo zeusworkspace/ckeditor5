@@ -9,7 +9,7 @@ order: 80
 
 # Content styles
 
-Some of the {@link features/index core editor features} bring additional CSS to control the look of the content they produce. Take, for example, the {@link features/image image feature} that needs special content styles to render images and their captions in the content. Or the {@link module:block-quote/blockquote~BlockQuote block quote} feature that displays quotes in italic with a subtle border on the side.
+Some of the {@link features/index core editor features} bring additional CSS to control the look of the content they produce. Take, for example, the {@link features/images-overview image feature} that needs special content styles to render images and their captions in the content. Or the {@link module:block-quote/blockquote~BlockQuote block quote} feature that displays quotes in italic with a subtle border on the side.
 
 {@img assets/img/builds-content-styles.png 823 Editor content styles.}
 
@@ -48,12 +48,14 @@ Below there is a full list of content styles used by the editor features. You ca
 
 ```css
 /*
- * CKEditor 5 (v28.0.0) content styles.
- * Generated on Mon, 07 Jun 2021 06:33:15 GMT.
+ * CKEditor 5 (v29.1.0) content styles.
+ * Generated on Wed, 04 Aug 2021 06:50:03 GMT.
  * For more information, check out https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/content-styles.html
  */
 
 :root {
+	--ck-color-image-caption-background: hsl(0, 0%, 97%);
+	--ck-color-image-caption-text: hsl(0, 0%, 20%);
 	--ck-color-mention-background: hsla(341, 100%, 30%, 0.1);
 	--ck-color-mention-text: hsl(341, 100%, 30%);
 	--ck-color-table-caption-background: hsl(0, 0%, 97%);
@@ -65,9 +67,98 @@ Below there is a full list of content styles used by the editor features. You ca
 	--ck-highlight-pen-green: hsl(112, 100%, 27%);
 	--ck-highlight-pen-red: hsl(0, 85%, 49%);
 	--ck-image-style-spacing: 1.5em;
+	--ck-inline-image-style-spacing: calc(var(--ck-image-style-spacing) / 2);
 	--ck-todo-list-checkmark-size: 16px;
 }
 
+/* ckeditor5-image/theme/imagestyle.css */
+.ck-content .image-style-block-align-left,
+.ck-content .image-style-block-align-right {
+	max-width: calc(100% - var(--ck-image-style-spacing));
+}
+/* ckeditor5-image/theme/imagestyle.css */
+.ck-content .image-style-align-left,
+.ck-content .image-style-align-right {
+	clear: none;
+}
+/* ckeditor5-image/theme/imagestyle.css */
+.ck-content .image-style-side {
+	float: right;
+	margin-left: var(--ck-image-style-spacing);
+	max-width: 50%;
+}
+/* ckeditor5-image/theme/imagestyle.css */
+.ck-content .image-style-align-left {
+	float: left;
+	margin-right: var(--ck-image-style-spacing);
+}
+/* ckeditor5-image/theme/imagestyle.css */
+.ck-content .image-style-align-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+/* ckeditor5-image/theme/imagestyle.css */
+.ck-content .image-style-align-right {
+	float: right;
+	margin-left: var(--ck-image-style-spacing);
+}
+/* ckeditor5-image/theme/imagestyle.css */
+.ck-content .image-style-block-align-right {
+	margin-right: 0;
+	margin-left: auto;
+}
+/* ckeditor5-image/theme/imagestyle.css */
+.ck-content .image-style-block-align-left {
+	margin-left: 0;
+	margin-right: auto;
+}
+/* ckeditor5-image/theme/imagestyle.css */
+.ck-content p + .image-style-align-left,
+.ck-content p + .image-style-align-right,
+.ck-content p + .image-style-side {
+	margin-top: 0;
+}
+/* ckeditor5-image/theme/imagestyle.css */
+.ck-content .image-inline.image-style-align-left,
+.ck-content .image-inline.image-style-align-right {
+	margin-top: var(--ck-inline-image-style-spacing);
+	margin-bottom: var(--ck-inline-image-style-spacing);
+}
+/* ckeditor5-image/theme/imagestyle.css */
+.ck-content .image-inline.image-style-align-left {
+	margin-right: var(--ck-inline-image-style-spacing);
+}
+/* ckeditor5-image/theme/imagestyle.css */
+.ck-content .image-inline.image-style-align-right {
+	margin-left: var(--ck-inline-image-style-spacing);
+}
+/* ckeditor5-image/theme/imagecaption.css */
+.ck-content .image > figcaption {
+	display: table-caption;
+	caption-side: bottom;
+	word-break: break-word;
+	color: var(--ck-color-image-caption-text);
+	background-color: var(--ck-color-image-caption-background);
+	padding: .6em;
+	font-size: .75em;
+	outline-offset: -1px;
+}
+/* ckeditor5-font/theme/fontsize.css */
+.ck-content .text-tiny {
+	font-size: .7em;
+}
+/* ckeditor5-font/theme/fontsize.css */
+.ck-content .text-small {
+	font-size: .85em;
+}
+/* ckeditor5-font/theme/fontsize.css */
+.ck-content .text-big {
+	font-size: 1.4em;
+}
+/* ckeditor5-font/theme/fontsize.css */
+.ck-content .text-huge {
+	font-size: 1.8em;
+}
 /* ckeditor5-highlight/theme/highlight.css */
 .ck-content .marker-yellow {
 	background-color: var(--ck-highlight-marker-yellow);
@@ -94,68 +185,6 @@ Below there is a full list of content styles used by the editor features. You ca
 	color: var(--ck-highlight-pen-green);
 	background-color: transparent;
 }
-/* ckeditor5-font/theme/fontsize.css */
-.ck-content .text-tiny {
-	font-size: .7em;
-}
-/* ckeditor5-font/theme/fontsize.css */
-.ck-content .text-small {
-	font-size: .85em;
-}
-/* ckeditor5-font/theme/fontsize.css */
-.ck-content .text-big {
-	font-size: 1.4em;
-}
-/* ckeditor5-font/theme/fontsize.css */
-.ck-content .text-huge {
-	font-size: 1.8em;
-}
-/* ckeditor5-image/theme/imagestyle.css */
-.ck-content .image-style-side {
-	float: right;
-	margin-left: var(--ck-image-style-spacing);
-	max-width: 50%;
-}
-/* ckeditor5-image/theme/imagestyle.css */
-.ck-content .image-style-align-left {
-	float: left;
-	margin-right: var(--ck-image-style-spacing);
-}
-/* ckeditor5-image/theme/imagestyle.css */
-.ck-content .image-style-align-center {
-	margin-left: auto;
-	margin-right: auto;
-}
-/* ckeditor5-image/theme/imagestyle.css */
-.ck-content .image-style-align-right {
-	float: right;
-	margin-left: var(--ck-image-style-spacing);
-}
-/* ckeditor5-image/theme/image.css */
-.ck-content .image {
-	display: table;
-	clear: both;
-	text-align: center;
-	margin: 1em auto;
-}
-/* ckeditor5-image/theme/image.css */
-.ck-content .image img {
-	display: block;
-	margin: 0 auto;
-	max-width: 100%;
-	min-width: 50px;
-}
-/* ckeditor5-image/theme/imagecaption.css */
-.ck-content .image > figcaption {
-	display: table-caption;
-	caption-side: bottom;
-	word-break: break-word;
-	color: hsl(0, 0%, 20%);
-	background-color: hsl(0, 0%, 97%);
-	padding: .6em;
-	font-size: .75em;
-	outline-offset: -1px;
-}
 /* ckeditor5-image/theme/imageresize.css */
 .ck-content .image.image_resized {
 	max-width: 100%;
@@ -170,29 +199,42 @@ Below there is a full list of content styles used by the editor features. You ca
 .ck-content .image.image_resized > figcaption {
 	display: block;
 }
-/* ckeditor5-language/theme/language.css */
-.ck-content span[lang] {
-	font-style: italic;
+/* ckeditor5-image/theme/image.css */
+.ck-content .image {
+	display: table;
+	clear: both;
+	text-align: center;
+	margin: 0.9em auto;
+	min-width: 50px;
 }
-/* ckeditor5-code-block/theme/codeblock.css */
-.ck-content pre {
-	padding: 1em;
-	color: hsl(0, 0%, 20.8%);
-	background: hsla(0, 0%, 78%, 0.3);
-	border: 1px solid hsl(0, 0%, 77%);
-	border-radius: 2px;
-	text-align: left;
-	direction: ltr;
-	tab-size: 4;
-	white-space: pre-wrap;
-	font-style: normal;
-	min-width: 200px;
+/* ckeditor5-image/theme/image.css */
+.ck-content .image img {
+	display: block;
+	margin: 0 auto;
+	max-width: 100%;
+	min-width: 100%;
 }
-/* ckeditor5-code-block/theme/codeblock.css */
-.ck-content pre code {
-	background: unset;
-	padding: 0;
-	border-radius: 0;
+/* ckeditor5-image/theme/image.css */
+.ck-content .image-inline {
+	/*
+	 * Normally, the .image-inline would have "display: inline-block" and "img { width: 100% }" (to follow the wrapper while resizing).;
+	 * Unfortunately, together with "srcset", it gets automatically stretched up to the width of the editing root.
+	 * This strange behavior does not happen with inline-flex.
+	 */
+	display: inline-flex;
+	max-width: 100%;
+	align-items: flex-start;
+}
+/* ckeditor5-image/theme/image.css */
+.ck-content .image-inline picture {
+	display: flex;
+}
+/* ckeditor5-image/theme/image.css */
+.ck-content .image-inline picture,
+.ck-content .image-inline img {
+	flex-grow: 1;
+	flex-shrink: 1;
+	max-width: 100%;
 }
 /* ckeditor5-horizontal-line/theme/horizontalline.css */
 .ck-content hr {
@@ -200,12 +242,6 @@ Below there is a full list of content styles used by the editor features. You ca
 	height: 4px;
 	background: hsl(0, 0%, 87%);
 	border: 0;
-}
-/* ckeditor5-html-embed/theme/htmlembed.css */
-.ck-content .raw-html-embed {
-	margin: 1em auto;
-	min-width: 15em;
-	font-style: normal;
 }
 /* ckeditor5-block-quote/theme/blockquote.css */
 .ck-content blockquote {
@@ -230,7 +266,7 @@ Below there is a full list of content styles used by the editor features. You ca
 }
 /* ckeditor5-table/theme/table.css */
 .ck-content .table {
-	margin: 1em auto;
+	margin: 0.9em auto;
 	display: table;
 }
 /* ckeditor5-table/theme/table.css */
@@ -312,7 +348,7 @@ Below there is a full list of content styles used by the editor features. You ca
 /* ckeditor5-media-embed/theme/mediaembed.css */
 .ck-content .media {
 	clear: both;
-	margin: 1em 0;
+	margin: 0.9em 0;
 	display: block;
 	min-width: 15em;
 }
@@ -382,6 +418,30 @@ Below there is a full list of content styles used by the editor features. You ca
 /* ckeditor5-list/theme/todolist.css */
 .ck-content .todo-list .todo-list__label .todo-list__label__description {
 	vertical-align: middle;
+}
+/* ckeditor5-language/theme/language.css */
+.ck-content span[lang] {
+	font-style: italic;
+}
+/* ckeditor5-code-block/theme/codeblock.css */
+.ck-content pre {
+	padding: 1em;
+	color: hsl(0, 0%, 20.8%);
+	background: hsla(0, 0%, 78%, 0.3);
+	border: 1px solid hsl(0, 0%, 77%);
+	border-radius: 2px;
+	text-align: left;
+	direction: ltr;
+	tab-size: 4;
+	white-space: pre-wrap;
+	font-style: normal;
+	min-width: 200px;
+}
+/* ckeditor5-code-block/theme/codeblock.css */
+.ck-content pre code {
+	background: unset;
+	padding: 0;
+	border-radius: 0;
 }
 /* ckeditor5-mention/theme/mention.css */
 .ck-content .mention {

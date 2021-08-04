@@ -55,6 +55,7 @@ import TodoList from "@ckeditor/ckeditor5-list/src/todolist";
 import TableProperties from "@ckeditor/ckeditor5-table/src/tableproperties";
 import TableCellProperties from "@ckeditor/ckeditor5-table/src/tablecellproperties";
 import {SimpleUploadAdapter} from "@ckeditor/ckeditor5-upload";
+import {Minimap} from '@ckeditor/ckeditor5-minimap';
 
 export default class DecoupledEditor extends DecoupledEditorBase {
 }
@@ -105,6 +106,7 @@ DecoupledEditor.builtinPlugins = [
     Placeholder,
     CustomFontSizeUI,
     CustomFontFamilyUI,
+    Minimap
 ];
 
 // Editor configuration.

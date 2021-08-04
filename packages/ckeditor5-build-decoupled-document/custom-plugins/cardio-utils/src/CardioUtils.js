@@ -15,9 +15,9 @@ export function addCustomEvents(editor) {
     ckDocument.on('selectionChangeDone', (evt, data) => {
         evt.stop();
         const editableElement = data.newSelection.editableElement;
-        if (editableElement && editableElement.name === 'td' && editableElement.getAttribute('tabindex')) {
+        if (editableElement && editableElement.name === 'td' && editableElement.getAttribute('tabindex') && !editableElement.isEmpty) {
             editor.editing.view.change(writer => {
-                writer.setSelection(editableElement, 'in');
+                writer.setSelection(editableElement, 'on');
             });
         }
     });
