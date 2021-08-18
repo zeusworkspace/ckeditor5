@@ -17,7 +17,7 @@ export function addCustomEvents(editor) {
         const editableElement = data.newSelection.editableElement;
         if (editableElement && editableElement.name === 'td' && editableElement.getAttribute('tabindex') && !editableElement.isEmpty) {
             editor.editing.view.change(writer => {
-                writer.setSelection(editableElement, 'on');
+                writer.setSelection(editableElement, 'in');
             });
         }
     });

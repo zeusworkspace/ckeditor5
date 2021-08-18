@@ -256,6 +256,11 @@ function saveData(data) {
                 url: form.attr('action'),
                 data: form.serialize(),
                 type: 'post',
+                beforeSend: function() {
+                    autosaveAlert.addClass('alert-warning');
+                    autosaveText.text('Salvando...');
+                    circleLoader.removeClass('hidden');
+                },
                 success(data) {
                     circleLoader.addClass('load-complete');
                     checkMark.show();
