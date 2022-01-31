@@ -215,7 +215,7 @@ function upcastListItemStyle() {
 
 			// It may happen that the native spell checker fixes a word inside a list item.
 			// When the children mutation is fired, the `<li>` does not have the parent element. See: #9325.
-			if ( !listParent ) {
+			if ( !listParent || !data.modelRange ) {
 				return;
 			}
 
