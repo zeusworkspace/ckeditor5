@@ -7,47 +7,46 @@
 
 'use strict';
 
-const childProcess = require( 'child_process' );
 const path = require( 'path' );
-const { getChangesForVersion } = require( '@ckeditor/ckeditor5-dev-env/lib/release-tools/utils/changelog' );
+const { getChangesForVersion, getChangelog } = require( '@ckeditor/ckeditor5-dev-env/lib/release-tools/utils/changelog' );
 
 const ROOT_DIRECTORY = path.join( __dirname, '..', '..' );
-
 const VERSIONS_TO_PRINT = 3;
 
 /**
- * Returns changelogs formatted in markdown for last X versions of the editor. Additional formatting is applied:
+ * Returns changelogs formatted in markdown for the last three versions of the CKEditor 5 releases.
+ * Additional, the following sections for each entry are modified:
  *
- * - "ℹ️" character in "BREAKING CHANGE" headers removed.
- * - "Released packages" section removed.
+ * - The "ℹ️" symbol is removed.
+ * - The "Released packages" section is removed.
+ * - The "Release highlights" section is removed.
  *
  * @returns {String}
  */
 module.exports = () => {
-	return childProcess
-		// Git does not contain a single command for displaying N last tags.
-		// Hence, we need to adjust the returned output manually.
-		// First, find all available tags.
-		.execSync( 'git tag', {
-			encoding: 'utf8',
-			cwd: ROOT_DIRECTORY
-		} )
-		// Remove the last new line.
-		.trim()
-		// Each line contains a single tag.
-		.split( '\n' )
-		// Reverse the list to start with the latest releases.
-		.reverse()
+	const changes = getChangelog( ROOT_DIRECTORY );
+
+	// Get all releases from the changelog file.
+	return [ ...changes.matchAll( /## \[(?<version>\d+\.\d+\.\d+)\]/g ) ]
+		// Take `version` from matches.
+		.map( match => match.groups.version )
 		// Take three latest.
 		.slice( 0, VERSIONS_TO_PRINT )
 		// And map each version to its changelog entries.
 		.map( version => {
 			// `slice` removes the `v` prefix.
-			const changelog = getChangesForVersion( version.slice( 1 ) )
+			const changelog = getChangesForVersion( version, ROOT_DIRECTORY )
 				// Remove the `ℹ️` character along with its link from breaking change headers.
 				.replace( / \[ℹ️\]\(.+\)$/gm, '' )
-				// Remove `Release highlights` section.
-				.replace( getSectionRegexp( 'Release highlights' ), '' )
+				// Replace `Release highlights` section with just a single paragraph containing the link to the blog post.
+				.replace( getSectionRegexp( 'Release highlights' ), section => {
+					// Blog post paragraph starts with a new line, contains the link and ends with a new line.
+					const blogPostLink = 'https://ckeditor.com/blog/';
+					const blogPostParagraphRegexp = new RegExp( `(?<=\n).*?${ blogPostLink }.*?(?=\n)` );
+					const result = section.match( blogPostParagraphRegexp );
+
+					return result ? result[ 0 ] : '';
+				} )
 				// Remove `Released packages` section.
 				.replace( getSectionRegexp( 'Released packages' ), '' );
 

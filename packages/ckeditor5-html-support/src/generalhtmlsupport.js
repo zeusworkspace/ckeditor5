@@ -20,6 +20,7 @@ import ScriptElementSupport from './integrations/script';
 import TableElementSupport from './integrations/table';
 import StyleElementSupport from './integrations/style';
 import DocumentListElementSupport from './integrations/documentlist';
+import CustomElementSupport from './integrations/customelement';
 
 /**
  * The General HTML Support feature.
@@ -51,7 +52,8 @@ export default class GeneralHtmlSupport extends Plugin {
 			ScriptElementSupport,
 			TableElementSupport,
 			StyleElementSupport,
-			DocumentListElementSupport
+			DocumentListElementSupport,
+			CustomElementSupport
 		];
 	}
 
@@ -86,7 +88,7 @@ export default class GeneralHtmlSupport extends Plugin {
 	}
 
 	/**
-	 * Updates GHS model attribute for a specified view element name, so it includes a given class name.
+	 * Updates GHS model attribute for a specified view element name, so it includes the given class name.
 	 *
 	 * @protected
 	 * @param {String} viewElementName A view element name.
@@ -109,7 +111,7 @@ export default class GeneralHtmlSupport extends Plugin {
 	}
 
 	/**
-	 * Updates GHS model attribute for a specified view element name, so it does not include a given class name.
+	 * Updates GHS model attribute for a specified view element name, so it does not include the given class name.
 	 *
 	 * @protected
 	 * @param {String} viewElementName A view element name.
@@ -132,7 +134,7 @@ export default class GeneralHtmlSupport extends Plugin {
 	}
 
 	/**
-	 * Updates GHS model attribute for a specified view element name, so it includes a given attribute.
+	 * Updates GHS model attribute for a specified view element name, so it includes the given attribute.
 	 *
 	 * @protected
 	 * @param {String} viewElementName A view element name.
@@ -155,7 +157,7 @@ export default class GeneralHtmlSupport extends Plugin {
 	}
 
 	/**
-	 * Updates GHS model attribute for a specified view element name, so it does not include a given attribute.
+	 * Updates GHS model attribute for a specified view element name, so it does not include the given attribute.
 	 *
 	 * @protected
 	 * @param {String} viewElementName A view element name.

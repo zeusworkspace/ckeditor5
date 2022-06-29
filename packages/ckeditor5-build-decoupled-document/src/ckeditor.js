@@ -15,6 +15,9 @@ import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
+import CKBox from '@ckeditor/ckeditor5-ckbox/src/ckbox';
+import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
+import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
 import Image from '@ckeditor/ckeditor5-image/src/image';
 import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
@@ -25,6 +28,7 @@ import ListStyle from '@ckeditor/ckeditor5-list/src/liststyle';
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
+import PictureEditing from '@ckeditor/ckeditor5-image/src/pictureediting';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
@@ -81,16 +85,21 @@ DecoupledEditor.builtinPlugins = [
     ImageToolbar,
     ImageUpload,
     ImageResize,
+    EasyImage,
     Indent,
     IndentBlock,
     Blockquote,
+	CKBox,
+    CKFinder,
     HorizontalLine,
     PageBreak,
     List,
+	ListProperties,
     TodoList,
     ListStyle,
     Paragraph,
     PasteFromOffice,
+	PictureEditing,
     Table,
     TableToolbar,
     TableProperties,

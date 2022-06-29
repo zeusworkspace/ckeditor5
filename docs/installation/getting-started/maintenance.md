@@ -9,7 +9,7 @@ modified_at: 2021-07-16
 <info-box hint>
 **Quick recap**
 
-In the previous tutorials you have learned about installing, configuring and extending your editor. This guide is the last chapter from the *Getting started* section, so if you are looking for some basic information about the editor, check the previous articles!
+In the previous tutorials you have learned about installing, configuring and extending your editor. This guide is the final chapter from the *Getting started* section, so if you are looking for some basic information about the editor, check the previous articles!
 </info-box>
 
 CKEditor 5 is an active, rapidly developing software project. It is, therefore, important to keep in touch with all the new features and APIs, changes and bug fixes that are periodically released. As in the case of every software project, it is always wise and highly advised to keep your copy of CKEditor 5 and all plugins up-to-date to maintain the highest level of security and stability. To ensure your CKEditor 5 installation is always up-to-date, observe the following suggestions.
@@ -20,7 +20,7 @@ Regular code releases (there are usually 10-12 of these a year) bring different 
 
 ### Code release
 
-Each code release is noted in the [changelog](https://github.com/ckeditor/ckeditor5/blob/stable/CHANGELOG.md) and enumerates all changes, additions and bug fixes that took place, also highlighting if there are any breaking changes (i.e. changes that make the latest release incompatible with the previous ones code-wise). These are released on the [CKEditor 5 npm site](https://www.npmjs.com/package/ckeditor5), as well as in {@link installation/advanced/predefined-builds#download-options updated predefined builds} and {@link installation/getting-started/quick-start#creating-custom-builds-with-online-builder online builder} and are ready to download.
+Each code release is noted in the [changelog](https://github.com/ckeditor/ckeditor5/blob/stable/CHANGELOG.md) and enumerates all changes, additions and bug fixes that took place, also highlighting if there are any breaking changes (i.e. changes that make the latest release incompatible with the previous ones code-wise). These are released on the [CKEditor 5 npm site](https://www.npmjs.com/package/ckeditor5), as well as in {@link installation/advanced/predefined-builds#download-options updated predefined builds} and {@link installation/getting-started/quick-start-other#creating-custom-builds-with-online-builder online builder} and are ready to download.
 
 It is good to follow npm release messages about new packages being published as well as periodically check the changelog.
 
@@ -44,7 +44,7 @@ CKEditor 5 should be {@link updating/updating updated frequently}, as bug fixes 
 
 ### Update your custom builds
 
-If you want to skip some editor features, {@link installation/getting-started/quick-start#creating-custom-builds-with-online-builder customize your build with online builder} and remove unneeded functionality. Alternatively, {@link installation/getting-started/quick-start#building-the-editor-from-source create your own customized build from scratch}. It is a bad practice to download a {@link installation/advanced/predefined-builds predefined editor build} and then remove plugins or buttons in your configuration. You will only be loading unnecessary stuff without any good reason.
+If you want to skip some editor features, {@link installation/getting-started/quick-start-other#creating-custom-builds-with-online-builder customize your build with online builder} and remove unneeded functionality. Alternatively, {@link installation/getting-started/quick-start-other#building-the-editor-from-source create your own customized build from scratch}. It is a bad practice to download a {@link installation/advanced/predefined-builds predefined editor build} and then remove plugins or buttons in your configuration. You will only be loading unnecessary stuff without any good reason.
 
 ### Use online builder to add plugins
 
