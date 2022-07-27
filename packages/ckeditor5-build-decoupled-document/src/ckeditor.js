@@ -89,12 +89,12 @@ DecoupledEditor.builtinPlugins = [
     HorizontalLine,
     PageBreak,
     List,
-	ListProperties,
+    ListProperties,
     TodoList,
     ListStyle,
     Paragraph,
     PasteFromOffice,
-	PictureEditing,
+    PictureEditing,
     Table,
     TableToolbar,
     TableProperties,
@@ -222,22 +222,24 @@ DecoupledEditor.prototype.insertHtml = function (html) {
     const modelFragment = this.data.toModel(viewFragment);
     editor.model.change(writer => {
         const insertRange = editor.model.insertContent(modelFragment);
-        writer.setSelection(insertRange.end, 'after');
-        editor.editing.view.focus();
+        if (insertRange?.end) {
+            writer.setSelection(insertRange.end, 'after');
+            editor.editing.view.focus();
 
-        setTimeout(function () {
-            // Abre opções de variaveis caso exista alguma no texto inserido
-            if (!nextPlaceholder(editor, true)) {
-                // Caso atalho não possua variavel, rola para final do trecho inserido
-                const ev = new KeyboardEvent('keydown', {
-                    key: 'Enter',
-                    keyCode: 13,
-                    type: 'keydown',
-                    which: 13
-                });
-                editor.editing.view.getDomRoot().dispatchEvent(ev);
-            }
-        }, 100);
+            setTimeout(function () {
+                // Abre opções de variaveis caso exista alguma no texto inserido
+                if (!nextPlaceholder(editor, true)) {
+                    // Caso atalho não possua variavel, rola para final do trecho inserido
+                    const ev = new KeyboardEvent('keydown', {
+                        key: 'Enter',
+                        keyCode: 13,
+                        type: 'keydown',
+                        which: 13
+                    });
+                    editor.editing.view.getDomRoot().dispatchEvent(ev);
+                }
+            }, 100);
+        }
     });
 };
 
@@ -260,7 +262,7 @@ function saveData(data) {
                 url: form.attr('action'),
                 data: form.serialize(),
                 type: 'post',
-                beforeSend: function() {
+                beforeSend: function () {
                     autosaveAlert.addClass('alert-warning');
                     autosaveText.text('Salvando...');
                     circleLoader.removeClass('hidden');
