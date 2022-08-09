@@ -49,3 +49,5 @@ yalc.lock
 packages/ckeditor5-utils/src/**/*.js
 packages/*/src/**/*.d.ts
 
+
+/vendor/

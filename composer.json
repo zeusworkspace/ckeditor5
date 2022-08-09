@@ -1,37 +1,12 @@
 {
-	"name": "devaptas/ckeditor5",
-	"description": "The document editor build of CKEditor 5 – the best browser-based rich text editor.",
-	"type": "library",
-	"keywords": [
-        "ckeditor5-build",
-        "ckeditor",
-        "ckeditor5",
-        "ckeditor 5",
-        "wysiwyg",
-        "rich text",
-        "editor",
-        "html",
-        "contentEditable",
-        "editing",
-        "operational transformation",
-        "ot",
-        "collaboration",
-        "collaborative",
-        "real-time",
-        "framework"
+    "name": "devaptas/ckeditor5",
+    "description": "The document editor build of CKEditor 5 – the best browser-based rich text editor.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Tiago",
+            "email": "dev@zeus.clinic"
+        }
     ],
-	"homepage": "https://ckeditor.com/ckeditor-5",
-	"license": "GPL-2.0-or-later",
-	"authors": [
-		{
-			"name": "CKSource (http://cksource.com/)",
-			"homepage": "https://ckeditor.com"
-		}
-	],
-	"support": {
-		"issues": "http://dev.ckeditor.com",
-		"forum": "http://ckeditor.com/forums",
-		"wiki": "http://docs.ckeditor.com",
-		"source": "http://github.com/ckeditor/ckeditor-dev"
-	}
+    "require": {}
 }
