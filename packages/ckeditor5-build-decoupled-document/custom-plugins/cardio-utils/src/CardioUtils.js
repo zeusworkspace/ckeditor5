@@ -58,9 +58,24 @@ export function addCustomEvents(editor) {
     // Evento de remover linha
     ckDocument.on('click', (evt, data) => {
         const element = data.target;
-        if (element && element.hasClass('btn-remove')) {
+
+        // Remove linha
+        if (element?.hasClass('btn-remove')) {
             evt.stop();
             removeCkElement(editor, getCkElementById(editor, element.getAttribute('data-trid')));
+        }
+
+        // Remove linha com inputs vazios
+        if (element?.hasClass('btn-clean')) {
+            evt.stop();
+            let cells = getCkElementsByClass(editor, 'cardio-input-cell')
+            cells = [...cells, ...getCkElementsByClass(editor, 'cardio-auto-value-cell')]
+            cells.forEach(cell => {
+                const cellValue = cell?.getChild(0)?.data;
+                if (!cellValue || (cellValue === '-')) {
+                    removeCkElement(editor, getCkElementById(editor, 'tr-' + cell.getAttribute('id')));
+                }
+            })
         }
     });
 }
@@ -111,15 +126,21 @@ export function makeCalculations(elementId, editor) {
     let values = [];
     let result = '-';
 
-    // Superfície Corporal (m²)
+    // Superfície Corporal (m²) e IMC (kg/m²)
     if (elementId === 'altura' || elementId === 'peso') {
         values = getFormattedValues(editor, 'altura', 'peso');
         if (checkNumeric(values)) {
-            result = truncate(0.007184 * (Math.pow(values['altura'], 0.725)) * (Math.pow(values['peso'], 0.425)), 2).toString();
-        }
-        setCkElement(editor, getCkElementById(editor, 'sc'), result);
-        if (!isNaN(result)) {
-            makeCalculations('sc', editor);
+
+            // Superfície Corporal
+            const sc = truncate(0.007184 * (Math.pow(values['altura'], 0.725)) * (Math.pow(values['peso'], 0.425)), 2).toString() || '-';
+            setCkElement(editor, getCkElementById(editor, 'sc'), sc);
+            if (!isNaN(sc)) {
+                makeCalculations('sc', editor);
+            }
+
+            // IMC
+            const imc = truncate(values['peso'] / Math.pow((values['altura'] / 100), 2), 2).toString() || '-';
+            setCkElement(editor, getCkElementById(editor, 'imc'), imc);
         }
     }
 
@@ -140,6 +161,9 @@ export function makeCalculations(elementId, editor) {
                 (2.4 + (values['ddfve'] / 10))) / 1000, 1).toString();
         }
         setCkElement(editor, getCkElementById(editor, 'vdf'), result);
+        if (!isNaN(result)) {
+            makeCalculations('vdf', editor);
+        }
     }
 
     // Volume Sistólico Final
@@ -150,6 +174,9 @@ export function makeCalculations(elementId, editor) {
                 (2.4 + (values['dsfve'] / 10))) / 1000, 1).toString();
         }
         setCkElement(editor, getCkElementById(editor, 'vsf'), result);
+        if (!isNaN(result)) {
+            makeCalculations('vsf', editor);
+        }
     }
 
     // Volume Diastólico Final / Superficie Corporal
@@ -209,13 +236,10 @@ export function makeCalculations(elementId, editor) {
     }
 
     // Fração de Ejeção (Teicholz)
-    if (elementId === 'ddfve' || elementId === 'dsfve') {
-        values = getFormattedValues(editor, 'ddfve', 'dsfve');
+    if (elementId === 'vdf' || elementId === 'vsf') {
+        values = getFormattedValues(editor, 'vdf', 'vsf');
         if (checkNumeric(values)) {
-            result = ((Math.pow(values['ddfve'], 2) - Math.pow(values['dsfve'], 2)) / Math.pow(values['ddfve'], 2));
-            result = 100.0 * (result + (1 - result) * 0.15);
-            result = Math.round(result);
-            result = truncate(result, 1).toString();
+            result = truncate((values['vdf'] - values['vsf']) / values['vdf'] * 100, 1).toString();
         }
         setCkElement(editor, getCkElementById(editor, 'fet'), result);
     }
@@ -227,6 +251,27 @@ export function makeCalculations(elementId, editor) {
             result = truncate((values['ddfve'] - values['dsfve']) * (100 / values['ddfve']), 1).toString();
         }
         setCkElement(editor, getCkElementById(editor, 'pec'), result);
+    }
+
+    // Débito Cardíaco
+    if (elementId === 'vdf' || elementId === 'vsf' || elementId === 'freqcard') {
+        values = getFormattedValues(editor, 'vdf', 'vsf', 'freqcard');
+        if (checkNumeric(values)) {
+            result = truncate((values['vdf'] - values['vsf']) * values['freqcard'], 1).toString();
+        }
+        setCkElement(editor, getCkElementById(editor, 'debcard'), result);
+        if (!isNaN(result)) {
+            makeCalculations('debcard', editor);
+        }
+    }
+
+    // Índice Cardíaco
+    if (elementId === 'debcard' || elementId === 'sc') {
+        values = getFormattedValues(editor, 'debcard', 'sc');
+        if (checkNumeric(values)) {
+            result = truncate(values['debcard'] / values['sc'], 1).toString();
+        }
+        setCkElement(editor, getCkElementById(editor, 'indcard'), result);
     }
 
     // Massa do VE/superficie Corporal
@@ -457,17 +502,17 @@ function getCkElementById(editor, id) {
  * @returns {*}
  */
 function getCkElementsByClass(editor, className) {
+    let elements = [];
     if (editor.model) {
         const position = new ModelPosition(editor.model.document.getRoot(), [0]);
         const walker = new ModelTreeWalker({startPosition: position});
-        let elements = [];
         for (let element of walker) {
             if (element.type !== 'text' && inArray(className, element.item.getAttribute('classes'))) {
                 elements.push(element.item);
             }
         }
-        return elements;
     }
+    return elements;
 }
 
 function inArray(needle, haystack) {

@@ -45,7 +45,7 @@ export default class CardioEditing extends Plugin {
 		});
 
 		schema.register('cardioHidden', {
-			allowIn: 'cardioCell',
+			allowIn: ['cardioCell', 'cardioSectionCell'],
 			allowContentOf: '$block',
 		});
 
@@ -53,6 +53,11 @@ export default class CardioEditing extends Plugin {
 			allowIn: 'cardioHidden',
 			allowContentOf: '$block',
 			allowAttributes: ['data-trid'],
+		});
+
+		schema.register('cardioBtnClean', {
+			allowIn: 'cardioHidden',
+			allowContentOf: '$block',
 		});
 
 		schema.register('cardioSectionCell', {
@@ -64,13 +69,14 @@ export default class CardioEditing extends Plugin {
 		schema.register('cardioLabelCell', {
 			allowIn: 'cardioRow',
 			allowContentOf: '$block',
+			allowAttributes: ['colspan'],
 		});
 
 		schema.register('cardioInputCell', {
 			// Cannot be split or left by the caret.
 			isLimit: true,
 			allowIn: 'cardioRow',
-			allowAttributes: ['id', 'tabindex'],
+			allowAttributes: ['id', 'tabindex', 'classes'],
 			allowContentOf: '$block',
 		});
 
@@ -81,7 +87,7 @@ export default class CardioEditing extends Plugin {
 
 		schema.register('cardioAutoValueCell', {
 			allowIn: 'cardioRow',
-			allowAttributes: ['id'],
+			allowAttributes: ['id', 'classes'],
 			allowContentOf: '$block',
 		});
 
@@ -245,6 +251,32 @@ export default class CardioEditing extends Plugin {
 		});
 
 		/***
+		 * cardioBtnClean
+		 ***/
+		conversion.for('upcast').elementToElement({
+			converterPriority: 'highest',
+			model: (viewElement, conversionApi) => {
+                const modelWriter = conversionApi.writer;
+				return modelWriter.createElement('cardioBtnClean');
+			},
+			view: {
+				name: 'button',
+				classes: 'btn-clean',
+			},
+		});
+		conversion.for('downcast').elementToElement({
+			converterPriority: 'highest',
+			model: 'cardioBtnClean',
+			view: (modelElement, conversionApi) => {
+                const viewWriter = conversionApi.writer;
+				return viewWriter.createContainerElement('button', {
+					class: 'btn btn-xs btn-danger btn-block btn-clean',
+					style: 'white-space:nowrap;',
+				});
+			},
+		});
+
+		/***
 		 * cardioSectionCell
 		 ***/
 		conversion.for('upcast').elementToElement({
@@ -267,7 +299,7 @@ export default class CardioEditing extends Plugin {
                 const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('td', {
 					class: 'cardio-section-cell',
-					style: 'font-weight:bold; padding-top:8px; ',
+					style: 'font-weight:bold; padding: 2px 0;',
 					colspan: modelElement.getAttribute('colspan')
 				});
 			},
@@ -278,10 +310,15 @@ export default class CardioEditing extends Plugin {
 		 ***/
 		conversion.for('upcast').elementToElement({
 			converterPriority: 'highest',
-			model: 'cardioLabelCell',
+			model: (viewElement, conversionApi) => {
+                const modelWriter = conversionApi.writer;
+				return modelWriter.createElement('cardioLabelCell', {
+					'colspan': viewElement.getAttribute('colspan'),
+				});
+			},
 			view: {
 				name: 'td',
-				classes: 'cardio-label-cell',
+				classes: 'cardio-label-cell'
 			},
 		});
 		conversion.for('downcast').elementToElement({
@@ -291,7 +328,8 @@ export default class CardioEditing extends Plugin {
                 const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('td', {
 					class: 'cardio-label-cell',
-					style: 'white-space:nowrap;',
+					style: 'white-space:nowrap;padding-left:4px;',
+					colspan: modelElement.getAttribute('colspan')
 				});
 			},
 		});
@@ -306,6 +344,7 @@ export default class CardioEditing extends Plugin {
 				return modelWriter.createElement('cardioInputCell', {
 					id: viewElement.getAttribute('id'),
 					tabindex: viewElement.getAttribute('tabindex'),
+					classes: ['cardio-input-cell'],
 				});
 			},
 			view: {
@@ -360,6 +399,7 @@ export default class CardioEditing extends Plugin {
                 const modelWriter = conversionApi.writer;
 				return modelWriter.createElement('cardioAutoValueCell', {
 					id: viewElement.getAttribute('id'),
+					classes: ['cardio-auto-value-cell'],
 				});
 			},
 			view: {

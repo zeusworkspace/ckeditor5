@@ -78,8 +78,8 @@
     "directory": "packages/ckeditor5-build-decoupled-document"
   },
   "scripts": {
-    "build": "webpack --mode production",
-    "build-dev": "webpack --mode development",
+    "build": "rm -rf build && webpack --mode production",
+    "build-dev": "rm -rf build && webpack --mode development",
     "preversion": "npm run build"
   }
 }
