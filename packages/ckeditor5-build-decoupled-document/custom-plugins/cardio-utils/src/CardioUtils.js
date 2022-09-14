@@ -257,7 +257,7 @@ export function makeCalculations(elementId, editor) {
     if (elementId === 'vdf' || elementId === 'vsf' || elementId === 'freqcard') {
         values = getFormattedValues(editor, 'vdf', 'vsf', 'freqcard');
         if (checkNumeric(values)) {
-            result = truncate((values['vdf'] - values['vsf']) * values['freqcard'], 1).toString();
+            result = truncate((values['vdf'] - values['vsf']) * values['freqcard'] / 1000, 3).toString();
         }
         setCkElement(editor, getCkElementById(editor, 'debcard'), result);
         if (!isNaN(result)) {
@@ -269,7 +269,7 @@ export function makeCalculations(elementId, editor) {
     if (elementId === 'debcard' || elementId === 'sc') {
         values = getFormattedValues(editor, 'debcard', 'sc');
         if (checkNumeric(values)) {
-            result = truncate(values['debcard'] / values['sc'], 1).toString();
+            result = truncate(values['debcard'] / values['sc'], 3).toString();
         }
         setCkElement(editor, getCkElementById(editor, 'indcard'), result);
     }

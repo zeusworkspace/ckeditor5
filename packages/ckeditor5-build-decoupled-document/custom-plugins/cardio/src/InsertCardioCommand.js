@@ -390,19 +390,19 @@ function createCardioTable(editor) {
 			'</td>' +
 		'</tr>' +
 
-		// '<tr class="cardio-row" id="tr-erpve">' +
-		// 	'<td class="cardio-label-cell" colspan="4">Espessura Relativa das Paredes do VE:</td>' +
-		// 	`<td class="cardio-auto-value-cell" id="erpve">${(references['erpve'] || '-')}</td>` +
-		// 	'<td class="cardio-unit-cell">mm</</td>' +
-		// 	`<td class="cardio-ref-input-cell" id="referpve">${(references['referpve'] || '-')}</td>` +
-		// 	'<td class="cardio-cell">' +
-		// 		'<div class="cardio-hidden"><button class="btn btn-xs btn-danger btn-remove" data-trid="tr-erpve">x</button></div>' +
-		// 	'</td>' +
-		// '</tr>' +
+		'<tr class="cardio-row" id="tr-erpve">' +
+			'<td class="cardio-label-cell" colspan="4">Espessura Relativa das Paredes do VE:</td>' +
+			`<td class="cardio-auto-value-cell" id="erpve">${(references['erpve'] || '-')}</td>` +
+			'<td class="cardio-unit-cell">mm</</td>' +
+			`<td class="cardio-ref-input-cell" id="referpve">${(references['referpve'] || '-')}</td>` +
+			'<td class="cardio-cell">' +
+				'<div class="cardio-hidden"><button class="btn btn-xs btn-danger btn-remove" data-trid="tr-erpve">x</button></div>' +
+			'</td>' +
+		'</tr>' +
 
-		// '<tr class="cardio-row">' +
-		// 	'<td class="cardio-section-cell" colspan="8">Relações</td>' +
-		// '</tr>' +
+		'<tr class="cardio-row">' +
+			'<td class="cardio-section-cell" colspan="8">Relações</td>' +
+		'</tr>' +
 
 		'<tr class="cardio-row" id="tr-vaesc">' +
 			'<td class="cardio-label-cell" colspan="4">Volume do AE / Superfície Corporal:</td>' +
