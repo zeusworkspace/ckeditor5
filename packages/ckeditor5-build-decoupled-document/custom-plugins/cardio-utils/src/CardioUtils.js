@@ -70,10 +70,14 @@ export function addCustomEvents(editor) {
             evt.stop();
             let cells = getCkElementsByClass(editor, 'cardio-input-cell')
             cells = [...cells, ...getCkElementsByClass(editor, 'cardio-auto-value-cell')]
-            cells.forEach(cell => {
-                const cellValue = cell?.getChild(0)?.data;
+            cells.forEach(cardioTD => {
+                let cell = cardioTD;
+                while(cell && !cell.is('text')) {
+                    cell = cell.getChild(0)
+                }
+                const cellValue = cell?.data
                 if (!cellValue || (cellValue === '-')) {
-                    removeCkElement(editor, getCkElementById(editor, 'tr-' + cell.getAttribute('id')));
+                    removeCkElement(editor, getCkElementById(editor, 'tr-' + cardioTD.getAttribute('id')));
                 }
             })
         }
