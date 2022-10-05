@@ -363,7 +363,7 @@ export default class CardioEditing extends Plugin {
 					id: modelElement.getAttribute('id'),
 					tabindex: modelElement.getAttribute('tabindex'),
 					class: 'cardio-input-cell',
-					style: 'border:1px solid black; padding:2px; width:120px; text-align:right; white-space:nowrap;',
+					style: 'border:1px solid black; padding:2px; min-width:60px; text-align:right; white-space:nowrap;',
 				});
 				return toWidgetEditable(td, viewWriter);
 			},
@@ -387,7 +387,7 @@ export default class CardioEditing extends Plugin {
                 const viewWriter = conversionApi.writer;
 				return viewWriter.createContainerElement('td', {
 					class: 'cardio-unit-cell',
-					style: 'padding-left:2px; width:80px; white-space:nowrap;',
+					style: 'padding-left:2px; min-width:60px; white-space:nowrap;',
 				});
 			},
 		});
@@ -447,7 +447,7 @@ export default class CardioEditing extends Plugin {
 				const td = viewWriter.createEditableElement('td', {
 					id: id,
 					class: 'cardio-ref-input-cell',
-					style: 'padding:2px; width:80px; white-space:nowrap; text-align:left',
+					style: 'padding:2px; min-width:60px; white-space:nowrap; text-align:left',
 				});
 				return toWidgetEditable(td, viewWriter);
 			},
