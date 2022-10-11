@@ -129,6 +129,7 @@ export default class PlaceholderEditing extends Plugin {
 
             // Allow wherever text is allowed:
             allowIn: ['$block'],
+            allowContentOf: '$table',
 
             // The placeholder will act as an inline node:
             isInline: true,

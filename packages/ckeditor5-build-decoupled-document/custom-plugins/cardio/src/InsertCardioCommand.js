@@ -28,10 +28,10 @@ function createCardioTable(editor) {
 
 	const patientGender = editor.config.get('patientGender');
 	const patientAgeYears = parseInt(editor.config.get('patientAgeYears'));
-	const patientAgeMonths = parseInt(editor.config.get('patientAgeMonths'));
+	// const patientAgeMonths = parseInt(editor.config.get('patientAgeMonths'));
 	let references = {};
 
-	if ( patientAgeYears > 15 ) {
+	if ( patientAgeYears > 18 ) {
 		if ( patientGender === 'M' ) {
 			references = {
 				refsao: '31 - 37 mm',
@@ -56,7 +56,7 @@ function createCardioTable(editor) {
 				refpec: '25 - 43 %',
 				refmvesc: '45 - 115 g/m²',
 				refmve: '96 - 200 g',
-				referpve: '0,24 - 0,42 mm',
+				referpve: '0,24 - 0,42',
 			};
 		} else {
 
@@ -83,66 +83,66 @@ function createCardioTable(editor) {
 				refpec: '27 - 45 %',
 				refmvesc: '43 - 95 g/m²',
 				refmve: '66 - 150 g',
-				referpve: '0,22 - 0,42 mm',
+				referpve: '0,22 - 0,42',
 			};
-		}
-
-	} else {
-
-		if ( patientAgeYears < 1 ) {
-			if ( patientAgeMonths <= 3 ) {
-				references = {
-					refddfve: '21,7 mm',
-					refaesq: '15,7 mm',
-					refeds: '4,2 mm',
-					refedppve: '4,2 mm',
-				};
-			} else {
-				references = {
-					refddfve: '26,4 mm',
-					refaesq: '19,2 mm',
-					refeds: '4,6 mm',
-					refedppve: '4,6 mm',
-				};
-			}
-		} else if ( patientAgeYears <= 2 ) {
-
-			references = {
-				refddfve: '30,8 mm',
-				refaesq: '21,2 mm',
-				refeds: '5,6 mm',
-				refedppve: '5,4 mm',
-			};
-
-		} else if ( patientAgeYears <= 5 ) {
-
-			references = {
-				refddfve: '35,9 mm',
-				refaesq: '21,0 mm',
-				refeds: '5,7 mm',
-				refedppve: '6,1 mm',
-			};
-
-		} else if ( patientAgeYears <= 10 ) {
-
-			references = {
-				refddfve: '39,7 mm',
-				refaesq: '23,4 mm',
-				refeds: '7,0 mm',
-				refedppve: '7,3 mm',
-			};
-
-		} else if ( patientAgeYears <= 15 ) {
-
-			references = {
-				refddfve: '46,3 mm',
-				refaesq: '28,2 mm',
-				refeds: '8,8 mm',
-				refedppve: '8,8 mm',
-			};
-
 		}
 	}
+	// else {
+	//
+	// 	if ( patientAgeYears < 1 ) {
+	// 		if ( patientAgeMonths <= 3 ) {
+	// 			references = {
+	// 				refddfve: '21,7 mm',
+	// 				refaesq: '15,7 mm',
+	// 				refeds: '4,2 mm',
+	// 				refedppve: '4,2 mm',
+	// 			};
+	// 		} else {
+	// 			references = {
+	// 				refddfve: '26,4 mm',
+	// 				refaesq: '19,2 mm',
+	// 				refeds: '4,6 mm',
+	// 				refedppve: '4,6 mm',
+	// 			};
+	// 		}
+	// 	} else if ( patientAgeYears <= 2 ) {
+	//
+	// 		references = {
+	// 			refddfve: '30,8 mm',
+	// 			refaesq: '21,2 mm',
+	// 			refeds: '5,6 mm',
+	// 			refedppve: '5,4 mm',
+	// 		};
+	//
+	// 	} else if ( patientAgeYears <= 5 ) {
+	//
+	// 		references = {
+	// 			refddfve: '35,9 mm',
+	// 			refaesq: '21,0 mm',
+	// 			refeds: '5,7 mm',
+	// 			refedppve: '6,1 mm',
+	// 		};
+	//
+	// 	} else if ( patientAgeYears <= 10 ) {
+	//
+	// 		references = {
+	// 			refddfve: '39,7 mm',
+	// 			refaesq: '23,4 mm',
+	// 			refeds: '7,0 mm',
+	// 			refedppve: '7,3 mm',
+	// 		};
+	//
+	// 	} else if ( patientAgeYears <= 15 ) {
+	//
+	// 		references = {
+	// 			refddfve: '46,3 mm',
+	// 			refaesq: '28,2 mm',
+	// 			refeds: '8,8 mm',
+	// 			refedppve: '8,8 mm',
+	// 		};
+	//
+	// 	}
+	// }
 
 	let tabIndex = 0;
 	const variables = editor.config.get('variables');
@@ -261,6 +261,16 @@ function createCardioTable(editor) {
 			'</td>' +
 		'</tr>' +
 
+		'<tr class="cardio-row" id="tr-vaesc">' +
+			'<td class="cardio-label-cell" colspan="4">Volume do AE / Superfície Corporal:</td>' +
+			`<td class="cardio-auto-value-cell" id="vaesc">${(references['vaesc'] || '-')}</td>` +
+			'<td class="cardio-unit-cell">ml/m²</td>' +
+			`<td class="cardio-ref-input-cell" id="refvaesc">${(references['refvaesc'] || '-')}</td>` +
+			'<td class="cardio-cell">' +
+				'<div class="cardio-hidden"><button class="btn btn-xs btn-danger btn-remove" data-trid="tr-vaesc">x</button></div>' +
+			'</td>' +
+		'</tr>' +
+
 		'<tr class="cardio-row">' +
 			'<td class="cardio-section-cell" colspan="8">Ventrículo Direito</td>' +
 		'</tr>' +
@@ -300,6 +310,16 @@ function createCardioTable(editor) {
 			'</td>' +
 		'</tr>' +
 
+		'<tr class="cardio-row" id="tr-ddfvesc">' +
+			'<td class="cardio-label-cell" colspan="4">Diâmetro Diastólico Final do VE / SC:</td>' +
+			`<td class="cardio-auto-value-cell" id="ddfvesc">${(references['ddfvesc'] || '-')}</td>` +
+			'<td class="cardio-unit-cell">mm/m²</td>' +
+			`<td class="cardio-ref-input-cell" id="refddfvesc">${(references['refddfvesc'] || '-')}</td>` +
+			'<td class="cardio-cell">' +
+				'<div class="cardio-hidden"><button class="btn btn-xs btn-danger btn-remove" data-trid="tr-ddfvesc">x</button></div>' +
+			'</td>' +
+		'</tr>' +
+
 		'<tr class="cardio-row" id="tr-dsfve">' +
 			'<td class="cardio-label-cell" colspan="4">Diâmetro Sistólico Final:</td>' +
 			`<td class="cardio-input-cell" id="dsfve" tabindex="${++tabIndex}"></td>` +
@@ -307,6 +327,16 @@ function createCardioTable(editor) {
 			`<td class="cardio-ref-input-cell" id="refdsfve">${(references['refdsfve'] || '-')}</td>` +
 			'<td class="cardio-cell">' +
 				'<div class="cardio-hidden"><button class="btn btn-xs btn-danger btn-remove" data-trid="tr-dsfve">x</button></div>' +
+			'</td>' +
+		'</tr>' +
+
+		'<tr class="cardio-row" id="tr-dsfvesc">' +
+			'<td class="cardio-label-cell" colspan="4">Diâmetro Sistólico Final do VE / SC:</td>' +
+			`<td class="cardio-auto-value-cell" id="dsfvesc">${(references['dsfvesc'] || '-')}</td>` +
+			'<td class="cardio-unit-cell">mm/m²</td>' +
+			`<td class="cardio-ref-input-cell" id="refdsfvesc">${(references['refdsfvesc'] || '-')}</td>` +
+			'<td class="cardio-cell">' +
+				'<div class="cardio-hidden"><button class="btn btn-xs btn-danger btn-remove" data-trid="tr-dsfvesc">x</button></div>' +
 			'</td>' +
 		'</tr>' +
 
@@ -340,6 +370,16 @@ function createCardioTable(editor) {
 			'</td>' +
 		'</tr>' +
 
+		'<tr class="cardio-row" id="tr-vdfsc">' +
+			'<td class="cardio-label-cell" colspan="4">Volume Diastólico Final / SC:</td>' +
+			`<td class="cardio-auto-value-cell" id="vdfsc">${(references['vdfsc'] || '-')}</td>` +
+			'<td class="cardio-unit-cell">ml/m²</td>' +
+			`<td class="cardio-ref-input-cell" id="refvdfsc">${(references['refvdfsc'] || '-')}</td>` +
+			'<td class="cardio-cell">' +
+				'<div class="cardio-hidden"><button class="btn btn-xs btn-danger btn-remove" data-trid="tr-vdfsc">x</button></div>' +
+			'</td>' +
+		'</tr>' +
+
 		'<tr class="cardio-row" id="tr-vsf">' +
 			'<td class="cardio-label-cell" colspan="4">Volume Sistólico Final:</td>' +
 			`<td class="cardio-input-cell" id="vsf" tabindex="${++tabIndex}"></td>` +
@@ -347,6 +387,16 @@ function createCardioTable(editor) {
 			`<td class="cardio-ref-input-cell" id="refvsf">${(references['refvsf'] || '-')}</td>` +
 			'<td class="cardio-cell">' +
 				'<div class="cardio-hidden"><button class="btn btn-xs btn-danger btn-remove" data-trid="tr-vsf">x</button></div>' +
+			'</td>' +
+		'</tr>' +
+
+		'<tr class="cardio-row" id="tr-vsfsc">' +
+			'<td class="cardio-label-cell" colspan="4">Volume Sistólico Final / SC:</td>' +
+			`<td class="cardio-auto-value-cell" id="vsfsc">${(references['vsfsc'] || '-')}</td>` +
+			'<td class="cardio-unit-cell">ml/m²</td>' +
+			`<td class="cardio-ref-input-cell" id="refvsfsc">${(references['refvsfsc'] || '-')}</td>` +
+			'<td class="cardio-cell">' +
+				'<div class="cardio-hidden"><button class="btn btn-xs btn-danger btn-remove" data-trid="tr-vsfsc">x</button></div>' +
 			'</td>' +
 		'</tr>' +
 
@@ -393,7 +443,7 @@ function createCardioTable(editor) {
 		'<tr class="cardio-row" id="tr-erpve">' +
 			'<td class="cardio-label-cell" colspan="4">Espessura Relativa das Paredes do VE:</td>' +
 			`<td class="cardio-auto-value-cell" id="erpve">${(references['erpve'] || '-')}</td>` +
-			'<td class="cardio-unit-cell">mm</</td>' +
+			'<td class="cardio-unit-cell"></</td>' +
 			`<td class="cardio-ref-input-cell" id="referpve">${(references['referpve'] || '-')}</td>` +
 			'<td class="cardio-cell">' +
 				'<div class="cardio-hidden"><button class="btn btn-xs btn-danger btn-remove" data-trid="tr-erpve">x</button></div>' +
@@ -402,56 +452,6 @@ function createCardioTable(editor) {
 
 		'<tr class="cardio-row">' +
 			'<td class="cardio-section-cell" colspan="8">Relações</td>' +
-		'</tr>' +
-
-		'<tr class="cardio-row" id="tr-vaesc">' +
-			'<td class="cardio-label-cell" colspan="4">Volume do AE / Superfície Corporal:</td>' +
-			`<td class="cardio-auto-value-cell" id="vaesc">${(references['vaesc'] || '-')}</td>` +
-			'<td class="cardio-unit-cell">ml/m²</td>' +
-			`<td class="cardio-ref-input-cell" id="refvaesc">${(references['refvaesc'] || '-')}</td>` +
-			'<td class="cardio-cell">' +
-				'<div class="cardio-hidden"><button class="btn btn-xs btn-danger btn-remove" data-trid="tr-vaesc">x</button></div>' +
-			'</td>' +
-		'</tr>' +
-
-		'<tr class="cardio-row" id="tr-vdfsc">' +
-			'<td class="cardio-label-cell" colspan="4">Volume Diastólico Final / SC:</td>' +
-			`<td class="cardio-auto-value-cell" id="vdfsc">${(references['vdfsc'] || '-')}</td>` +
-			'<td class="cardio-unit-cell">ml/m²</td>' +
-			`<td class="cardio-ref-input-cell" id="refvdfsc">${(references['refvdfsc'] || '-')}</td>` +
-			'<td class="cardio-cell">' +
-				'<div class="cardio-hidden"><button class="btn btn-xs btn-danger btn-remove" data-trid="tr-vdfsc">x</button></div>' +
-			'</td>' +
-		'</tr>' +
-
-		'<tr class="cardio-row" id="tr-vsfsc">' +
-			'<td class="cardio-label-cell" colspan="4">Volume Sistólico Final / SC:</td>' +
-			`<td class="cardio-auto-value-cell" id="vsfsc">${(references['vsfsc'] || '-')}</td>` +
-			'<td class="cardio-unit-cell">ml/m²</td>' +
-			`<td class="cardio-ref-input-cell" id="refvsfsc">${(references['refvsfsc'] || '-')}</td>` +
-			'<td class="cardio-cell">' +
-				'<div class="cardio-hidden"><button class="btn btn-xs btn-danger btn-remove" data-trid="tr-vsfsc">x</button></div>' +
-			'</td>' +
-		'</tr>' +
-
-		'<tr class="cardio-row" id="tr-ddfvesc">' +
-			'<td class="cardio-label-cell" colspan="4">Diâmetro Diastólico Final do VE / SC:</td>' +
-			`<td class="cardio-auto-value-cell" id="ddfvesc">${(references['ddfvesc'] || '-')}</td>` +
-			'<td class="cardio-unit-cell">mm/m²</td>' +
-			`<td class="cardio-ref-input-cell" id="refddfvesc">${(references['refddfvesc'] || '-')}</td>` +
-			'<td class="cardio-cell">' +
-				'<div class="cardio-hidden"><button class="btn btn-xs btn-danger btn-remove" data-trid="tr-ddfvesc">x</button></div>' +
-			'</td>' +
-		'</tr>' +
-
-		'<tr class="cardio-row" id="tr-dsfvesc">' +
-			'<td class="cardio-label-cell" colspan="4">Diâmetro Sistólico Final do VE / SC:</td>' +
-			`<td class="cardio-auto-value-cell" id="dsfvesc">${(references['dsfvesc'] || '-')}</td>` +
-			'<td class="cardio-unit-cell">mm/m²</td>' +
-			`<td class="cardio-ref-input-cell" id="refdsfvesc">${(references['refdsfvesc'] || '-')}</td>` +
-			'<td class="cardio-cell">' +
-				'<div class="cardio-hidden"><button class="btn btn-xs btn-danger btn-remove" data-trid="tr-dsfvesc">x</button></div>' +
-			'</td>' +
 		'</tr>' +
 
 		'<tr class="cardio-row" id="tr-mvesc">' +
