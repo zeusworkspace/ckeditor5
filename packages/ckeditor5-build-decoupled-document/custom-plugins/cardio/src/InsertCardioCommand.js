@@ -149,7 +149,7 @@ function createCardioTable(editor) {
 	const patientHeight = variables.find(item => (item.attr === 'patient_height'))?.value;
 	const patientWeight = variables.find(item => (item.attr === 'patient_weight'))?.value;
 
-	return '<table class="cardio-table">' +
+	return `<table class="cardio-table" style="font-size: ${editor.config.get('defaultCardioFontSize')}pt">` +
 		'<tbody class="cardio-tbody">' +
 
 		'<tr class="cardio-row">' +

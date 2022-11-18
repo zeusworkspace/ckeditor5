@@ -25,7 +25,8 @@ export default class CardioEditing extends Plugin {
 
 		schema.register('cardio', {
 			isObject: true,
-			allowWhere: '$block'
+			allowWhere: '$block',
+			allowAttributes: ['style'],
 		});
 
 		schema.register('cardioTBody', {
@@ -109,7 +110,9 @@ export default class CardioEditing extends Plugin {
 			converterPriority: 'highest',
 			model: (viewElement, conversionApi) => {
                 const modelWriter = conversionApi.writer;
-				return modelWriter.createElement('cardio');
+				return modelWriter.createElement('cardio', {
+					style: viewElement.getAttribute('style')
+				});
 			},
 			view: {
 				name: 'table',
@@ -122,7 +125,8 @@ export default class CardioEditing extends Plugin {
 			view: (modelElement, conversionApi) => {
                 const viewWriter = conversionApi.writer;
 				const table = viewWriter.createContainerElement('table', {
-					class: 'cardio-table'
+					class: 'cardio-table',
+					style: modelElement.getAttribute('style')
 				});
 				return toWidget(table, viewWriter, {label: 'cardio widget'});
 			},
