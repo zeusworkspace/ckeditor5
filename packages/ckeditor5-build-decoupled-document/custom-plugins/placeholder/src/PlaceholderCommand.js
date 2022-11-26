@@ -14,7 +14,8 @@ export default class PlaceholderCommand extends Command {
 				value: item.is_solved ? item.value : '',
 				isFixed: item.is_fixed ? 1 : '',
 				isSolved: item.is_solved ? 1 : '',
-				options: item.options ? JSON.stringify(item.options) : ''
+				options: item.options ? JSON.stringify(item.options) : '',
+				style: `font-size: ${editor.config.get('defaultFontSize')}pt`
 			});
 
 			// ... and insert it into the document.

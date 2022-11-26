@@ -129,7 +129,7 @@ export default class PlaceholderEditing extends Plugin {
 
             // Allow wherever text is allowed:
             allowIn: ['$block'],
-            allowContentOf: '$table',
+            allowContentOf: '$block',
 
             // The placeholder will act as an inline node:
             isInline: true,
@@ -138,7 +138,7 @@ export default class PlaceholderEditing extends Plugin {
             isObject: true,
 
             // The placeholder can have many types, like date, name, surname, etc:
-            allowAttributes: ['name', 'attr', 'value', 'isFixed', 'isSolved', 'options']
+            allowAttributes: ['name', 'attr', 'value', 'isFixed', 'isSolved', 'options', 'style']
         });
     }
 
@@ -161,7 +161,8 @@ export default class PlaceholderEditing extends Plugin {
                     value: viewElement.getAttribute('data-value'),
                     isFixed: viewElement.getAttribute('data-is-fixed'),
                     isSolved: viewElement.getAttribute('data-is-solved'),
-                    options: viewElement.getAttribute('data-options')
+                    options: viewElement.getAttribute('data-options'),
+                    style: viewElement.getAttribute('style')
                 };
 
                 // Converte a variavel fixa caso exista attributos
@@ -241,7 +242,8 @@ export default class PlaceholderEditing extends Plugin {
                 'data-value': modelElement.getAttribute('value'),
                 'data-is-fixed': modelElement.getAttribute('isFixed'),
                 'data-is-solved': modelElement.getAttribute('isSolved'),
-                'data-options': modelElement.getAttribute('options')
+                'data-options': modelElement.getAttribute('options'),
+                'style': modelElement.getAttribute('style'),
             };
             const placeholderView = viewWriter.createContainerElement('span', placeholder);
             setContent(viewWriter, placeholder, placeholderView);
