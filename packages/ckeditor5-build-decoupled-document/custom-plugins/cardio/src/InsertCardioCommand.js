@@ -28,7 +28,7 @@ function createCardioTable(editor) {
 
 	const patientGender = editor.config.get('patientGender');
 	const patientAgeYears = parseInt(editor.config.get('patientAgeYears'));
-	// const patientAgeMonths = parseInt(editor.config.get('patientAgeMonths'));
+	const patientAgeMonths = parseInt(editor.config.get('patientAgeMonths'));
 	let references = {};
 
 	if ( patientAgeYears > 18 ) {
@@ -87,62 +87,62 @@ function createCardioTable(editor) {
 			};
 		}
 	}
-	// else {
-	//
-	// 	if ( patientAgeYears < 1 ) {
-	// 		if ( patientAgeMonths <= 3 ) {
-	// 			references = {
-	// 				refddfve: '21,7 mm',
-	// 				refaesq: '15,7 mm',
-	// 				refeds: '4,2 mm',
-	// 				refedppve: '4,2 mm',
-	// 			};
-	// 		} else {
-	// 			references = {
-	// 				refddfve: '26,4 mm',
-	// 				refaesq: '19,2 mm',
-	// 				refeds: '4,6 mm',
-	// 				refedppve: '4,6 mm',
-	// 			};
-	// 		}
-	// 	} else if ( patientAgeYears <= 2 ) {
-	//
-	// 		references = {
-	// 			refddfve: '30,8 mm',
-	// 			refaesq: '21,2 mm',
-	// 			refeds: '5,6 mm',
-	// 			refedppve: '5,4 mm',
-	// 		};
-	//
-	// 	} else if ( patientAgeYears <= 5 ) {
-	//
-	// 		references = {
-	// 			refddfve: '35,9 mm',
-	// 			refaesq: '21,0 mm',
-	// 			refeds: '5,7 mm',
-	// 			refedppve: '6,1 mm',
-	// 		};
-	//
-	// 	} else if ( patientAgeYears <= 10 ) {
-	//
-	// 		references = {
-	// 			refddfve: '39,7 mm',
-	// 			refaesq: '23,4 mm',
-	// 			refeds: '7,0 mm',
-	// 			refedppve: '7,3 mm',
-	// 		};
-	//
-	// 	} else if ( patientAgeYears <= 15 ) {
-	//
-	// 		references = {
-	// 			refddfve: '46,3 mm',
-	// 			refaesq: '28,2 mm',
-	// 			refeds: '8,8 mm',
-	// 			refedppve: '8,8 mm',
-	// 		};
-	//
-	// 	}
-	// }
+	else {
+
+		if ( patientAgeYears < 1 ) {
+			if ( patientAgeMonths <= 3 ) {
+				references = {
+					refddfve: '21,7 mm',
+					refaesq: '15,7 mm',
+					refeds: '4,2 mm',
+					refedppve: '4,2 mm',
+				};
+			} else {
+				references = {
+					refddfve: '26,4 mm',
+					refaesq: '19,2 mm',
+					refeds: '4,6 mm',
+					refedppve: '4,6 mm',
+				};
+			}
+		} else if ( patientAgeYears <= 2 ) {
+
+			references = {
+				refddfve: '30,8 mm',
+				refaesq: '21,2 mm',
+				refeds: '5,6 mm',
+				refedppve: '5,4 mm',
+			};
+
+		} else if ( patientAgeYears <= 5 ) {
+
+			references = {
+				refddfve: '35,9 mm',
+				refaesq: '21,0 mm',
+				refeds: '5,7 mm',
+				refedppve: '6,1 mm',
+			};
+
+		} else if ( patientAgeYears <= 10 ) {
+
+			references = {
+				refddfve: '39,7 mm',
+				refaesq: '23,4 mm',
+				refeds: '7,0 mm',
+				refedppve: '7,3 mm',
+			};
+
+		} else if ( patientAgeYears <= 15 ) {
+
+			references = {
+				refddfve: '46,3 mm',
+				refaesq: '28,2 mm',
+				refeds: '8,8 mm',
+				refedppve: '8,8 mm',
+			};
+
+		}
+	}
 
 	let tabIndex = 0;
 	const variables = editor.config.get('variables');
